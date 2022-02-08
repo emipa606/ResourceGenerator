@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <ReGe.change.confirm>Selecting a new product will remove all current progress. Continue?</ReGe.change.confirm>
+  <ReGe.norecipes>No available recipes</ReGe.norecipes>
+  <ReGe.product>Product to generate</ReGe.product>
+</LanguageData>

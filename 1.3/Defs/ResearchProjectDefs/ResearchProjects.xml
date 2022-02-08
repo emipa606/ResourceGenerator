@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ResearchProjectDef>
+    <defName>BasicResourceGenerator</defName>
+    <label>resource generator</label>
+    <description>Makes it possible to build generators that can create products as long as they have power.</description>
+    <baseCost>1500</baseCost>
+    <techLevel>Industrial</techLevel>
+    <prerequisites>
+      <li>Electricity</li>
+    </prerequisites>
+    <researchViewX>6.00</researchViewX>
+    <researchViewY>5.05</researchViewY>
+  </ResearchProjectDef>
+</Defs>
