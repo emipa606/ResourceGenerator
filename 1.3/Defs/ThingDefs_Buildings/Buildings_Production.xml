@@ -27,10 +27,8 @@
       </li>
       <li Class="CompProperties_Breakdownable" />
       <li Class="CompProperties_Flickable" />
-      <li Class="CompProperties_Spawner">
+      <li Class="ResourceGenerator.CompProperties_ResourceSpawner">
         <requiresPower>true</requiresPower>
-        <thingToSpawn>Steel</thingToSpawn>
-        <spawnCount>75</spawnCount>
         <spawnIntervalRange>
           <min>120000</min>
           <max>120000</max>

@@ -11,18 +11,19 @@ public class ResourceGenerator : Building
 {
     private static readonly Vector3 iconSize = new Vector3(0.5f, 1f, 0.5f);
     private static readonly Vector3 iconOffset = new Vector3(0.3f, 1.1f, 0.3f);
+    private int currentAmount;
     private Color currentColor;
     private Texture2D currentIcon;
     private ThingDef currentProduct;
-    private CompSpawner spawner;
+    private CompResourceSpawner spawner;
 
-    public CompSpawner Spawner
+    public CompResourceSpawner Spawner
     {
         get
         {
             if (spawner == null)
             {
-                spawner = GetComp<CompSpawner>();
+                spawner = GetComp<CompResourceSpawner>();
             }
 
             return spawner;
@@ -47,6 +48,21 @@ public class ResourceGenerator : Building
             CurrentIcon = null;
             CurrentColor = default;
         }
+    }
+
+    public int CurrentAmount
+    {
+        get
+        {
+            if (currentAmount != 0)
+            {
+                return currentAmount;
+            }
+
+            currentAmount = amountToSpawn(CurrentProduct);
+            return currentAmount;
+        }
+        set => currentAmount = value;
     }
 
     public Texture2D CurrentIcon
@@ -83,6 +99,7 @@ public class ResourceGenerator : Building
     {
         base.ExposeData();
         Scribe_Defs.Look(ref currentProduct, "currentProduct");
+        Scribe_Values.Look(ref currentAmount, "currentAmount");
     }
 
     public override void SpawnSetup(Map map, bool respawningAfterLoad)
@@ -142,8 +159,7 @@ public class ResourceGenerator : Building
     private void setProduct(ThingDef thingToSet, bool reset)
     {
         CurrentProduct = thingToSet;
-        Spawner.PropsSpawner.thingToSpawn = CurrentProduct;
-        Spawner.PropsSpawner.spawnCount = amountToSpawn(CurrentProduct);
+        CurrentAmount = amountToSpawn(CurrentProduct);
 
         if (reset)
         {
