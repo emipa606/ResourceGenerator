@@ -8,7 +8,9 @@ Adds a Resource Generator that can generate many resources in the game.
 The amount of items spawned are determined by their marketvalue. 
 Generators spawns items with a value equivalent of 75x Steel every two days as long as they have power.
 
-Possible items to generate includes all stackable items that are either minable or is a stuff-type (Metal, Stone, Textile)
+Possible items to generate includes all stackable items that are either minable or is a stuff-type (Metal, Stone, Textile), vanilla and modded resources. 
+
+-  https://steamcommunity.com/sharedfiles/filedetails/?id=2751395096]Chinese translation by asavikle
 
 ![Image](https://i.imgur.com/O0IIlYj.png)
 

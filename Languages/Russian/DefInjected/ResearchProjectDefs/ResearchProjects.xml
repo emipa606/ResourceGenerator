@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-    <BasicResourceGenerator.label>Генератор ресурсов</BasicResourceGenerator.label>
-    <BasicResourceGenerator.description>Открывает возможность постройки генераторов, которые будут производить ресурсы до тех пор, пока подключены к электрической сети.</BasicResourceGenerator.description>
+  <BasicResourceGenerator.label>Генератор ресурсов</BasicResourceGenerator.label>
+  <BasicResourceGenerator.description>Открывает возможность постройки генераторов, которые будут производить ресурсы до тех пор, пока подключены к электрической сети.</BasicResourceGenerator.description>
 </LanguageData>
