@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <ReGe.change.confirm>Начав производство нового ресурса, вы потеряете весь текущий прогресс. Продолжить?</ReGe.change.confirm>
+  <ReGe.norecipes>Нет доступных рецептов</ReGe.norecipes>
+  <ReGe.product>Производить ресурс</ReGe.product>
+</LanguageData>
