@@ -3,4 +3,14 @@
   <ReGe.change.confirm>Selecting a new product will remove all current progress. Continue?</ReGe.change.confirm>
   <ReGe.norecipes>No available recipes</ReGe.norecipes>
   <ReGe.product>Product to generate</ReGe.product>
+  <ReGe.GenerationTime.label>Timespan for generating: {0} to {1} hours</ReGe.GenerationTime.label>
+  <ReGe.GenerationTime.tooltip>Each cycle will require a random value in this range.</ReGe.GenerationTime.tooltip>
+  <ReGe.GenerationValue.label>Marketvalue to generate: {0}</ReGe.GenerationValue.label>
+  <ReGe.GenerationValue.tooltip>Products equal to this market value will be generated each cycle</ReGe.GenerationValue.tooltip>
+  <ReGe.ExampleTitle.label>Example of products generated based on the current set value. Values on existing generators will not change unless the product is changed.</ReGe.ExampleTitle.label>
+  <ReGe.ExampleSteel.label>{0} Steel</ReGe.ExampleSteel.label>
+  <ReGe.ExampleComponent.label>{0} Components</ReGe.ExampleComponent.label>
+  <ReGe.ExampleWood.label>{0} Wood</ReGe.ExampleWood.label>
+  <ReGe.Reset.label>Reset</ReGe.Reset.label>
+  <ReGe.Version.label>Installed mod-version: {0}</ReGe.Version.label>
 </LanguageData>

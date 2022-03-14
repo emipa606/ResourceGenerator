@@ -194,7 +194,7 @@ public class CompResourceSpawner : ThingComp
 
     private void ResetCountdown()
     {
-        ticksUntilSpawn = PropsSpawner.spawnIntervalRange.RandomInRange;
+        ticksUntilSpawn = ResourceGeneratorMod.instance.Settings.GenerationTime.RandomInRange;
     }
 
     public override void PostExposeData()

@@ -29,10 +29,6 @@
       <li Class="CompProperties_Flickable" />
       <li Class="ResourceGenerator.CompProperties_ResourceSpawner">
         <requiresPower>true</requiresPower>
-        <spawnIntervalRange>
-          <min>120000</min>
-          <max>120000</max>
-        </spawnIntervalRange>
         <writeTimeLeftToSpawn>true</writeTimeLeftToSpawn>
         <showMessageIfOwned>true</showMessageIfOwned>
       </li>

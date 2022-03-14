@@ -11,10 +11,25 @@ public class Main
 {
     public static readonly HashSet<ThingDef> ValidResources;
     public static readonly Texture2D NoPower = ContentFinder<Texture2D>.Get("UI/Buttons/Abandon", false);
-    public static readonly float ValuePerCycle;
 
     static Main()
     {
+        if (ResourceGeneratorMod.instance.Settings.GenerationValue == 0)
+        {
+            ResourceGeneratorMod.instance.Settings.GenerationValue =
+                ThingDefOf.Steel.GetStatValueAbstract(StatDefOf.MarketValue) * 75;
+        }
+
+        if (ResourceGeneratorMod.instance.Settings.GenerationTime == default)
+        {
+            ResourceGeneratorMod.instance.Settings.GenerationTime = new IntRange(120000, 120000);
+        }
+
+        ResourceGeneratorMod.steelWorth = ThingDefOf.Steel.GetStatValueAbstract(StatDefOf.MarketValue);
+        ResourceGeneratorMod.componentWorth =
+            ThingDefOf.ComponentIndustrial.GetStatValueAbstract(StatDefOf.MarketValue);
+        ResourceGeneratorMod.woodWorth = ThingDefOf.WoodLog.GetStatValueAbstract(StatDefOf.MarketValue);
+
         ValidResources = new HashSet<ThingDef>();
         ValidResources.AddRange(DefDatabase<ThingDef>.AllDefsListForReading
             .Where(def => def.IsStuff));
@@ -23,6 +38,5 @@ public class Main
         //ValidResources.AddRange(DefDatabase<ThingDef>.AllDefsListForReading
         //    .Where(def => def.recipeMaker != null && def.stackLimit > 1));
         Log.Message($"[ResourceGenerator]: Added {ValidResources.Count} resources as possible to generate");
-        ValuePerCycle = ThingDefOf.Steel.GetStatValueAbstract(StatDefOf.MarketValue) * 75;
     }
 }

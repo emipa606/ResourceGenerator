@@ -210,7 +210,7 @@ public class ResourceGenerator : Building
     private static int amountToSpawn(ThingDef thingDef)
     {
         var itemWorh = thingDef.GetStatValueAbstract(StatDefOf.MarketValue);
-        return (int)Math.Round(Main.ValuePerCycle / itemWorh);
+        return (int)Math.Round(ResourceGeneratorMod.instance.Settings.GenerationValue / itemWorh);
     }
 
     private static Texture2D getIcon(ThingDef thingDef)

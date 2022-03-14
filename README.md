@@ -11,6 +11,7 @@ Generators spawns items with a value equivalent of 75x Steel every two days as l
 Possible items to generate includes all stackable items that are either minable or is a stuff-type (Metal, Stone, Textile), vanilla and modded resources. 
 
 -  https://steamcommunity.com/sharedfiles/filedetails/?id=2751395096]Chinese translation by asavikle
+- Russian translation by AveAcVale
 
 ![Image](https://i.imgur.com/O0IIlYj.png)
 

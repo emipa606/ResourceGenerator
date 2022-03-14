@@ -1,5 +1,8 @@
 # Changelog for ResourceGenerator
 
+1.3.3 - Added settings for amount and time for spawning resources
+
+
 1.3.2 - Russian translation added, thank you AveAcVale!
 
 
