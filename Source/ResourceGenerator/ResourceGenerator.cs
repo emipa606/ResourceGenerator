@@ -158,12 +158,30 @@ public class ResourceGenerator : Building
 
     private void setProduct(ThingDef thingToSet, bool reset)
     {
-        CurrentProduct = thingToSet;
-        CurrentAmount = amountToSpawn(CurrentProduct);
-
-        if (reset)
+        var originalProduct = CurrentProduct;
+        foreach (var selectedObject in Find.Selector.SelectedObjects)
         {
-            Spawner.PostSpawnSetup(false);
+            if (selectedObject is not ResourceGenerator resourceGenerator)
+            {
+                continue;
+            }
+
+            if (originalProduct != resourceGenerator.CurrentProduct)
+            {
+                continue;
+            }
+
+            if (!reset && resourceGenerator != this)
+            {
+                continue;
+            }
+
+            resourceGenerator.CurrentProduct = thingToSet;
+            resourceGenerator.CurrentAmount = amountToSpawn(CurrentProduct);
+            if (reset)
+            {
+                resourceGenerator.Spawner.PostSpawnSetup(false);
+            }
         }
     }
 

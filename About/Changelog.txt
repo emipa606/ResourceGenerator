@@ -1,5 +1,8 @@
 # Changelog for ResourceGenerator
 
+1.3.4 - Multiple resource generators can now be changed at the same time
+
+
 1.3.3 - Added settings for amount and time for spawning resources
 
 
