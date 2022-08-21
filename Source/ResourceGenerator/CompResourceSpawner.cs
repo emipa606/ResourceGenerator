@@ -133,7 +133,8 @@ public class CompResourceSpawner : ThingComp
             t.SetForbidden(true);
         }
 
-        if (PropsSpawner.showMessageIfOwned && parent.Faction == Faction.OfPlayer)
+        if (ResourceGeneratorMod.instance.Settings.ShowNotification && PropsSpawner.showMessageIfOwned &&
+            parent.Faction == Faction.OfPlayer)
         {
             Messages.Message("MessageCompSpawnerSpawnedItem".Translate(product.LabelCap), thing,
                 MessageTypeDefOf.PositiveEvent);

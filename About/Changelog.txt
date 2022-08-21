@@ -1,5 +1,9 @@
 # Changelog for ResourceGenerator
 
+1.3.5 - Added setting to turn off notification of created products.
+Used DeepL to update translations for Russian
+
+
 1.3.4 - Multiple resource generators can now be changed at the same time
 
 

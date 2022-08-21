@@ -98,6 +98,8 @@ internal class ResourceGeneratorMod : Mod
             Settings.GenerationValue = steelWorth * 75;
         }
 
+        listing_Standard.CheckboxLabeled("ReGe.ShowNotification.label".Translate(), ref Settings.ShowNotification);
+
         if (currentVersion != null)
         {
             listing_Standard.Gap();

@@ -11,6 +11,7 @@
   <ReGe.ExampleSteel.label>{0} Steel</ReGe.ExampleSteel.label>
   <ReGe.ExampleComponent.label>{0} Components</ReGe.ExampleComponent.label>
   <ReGe.ExampleWood.label>{0} Wood</ReGe.ExampleWood.label>
+  <ReGe.ShowNotification.label>Show notification when creating a product</ReGe.ShowNotification.label>
   <ReGe.Reset.label>Reset</ReGe.Reset.label>
   <ReGe.Version.label>Installed mod-version: {0}</ReGe.Version.label>
 </LanguageData>
