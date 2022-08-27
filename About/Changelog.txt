@@ -1,5 +1,9 @@
 # Changelog for ResourceGenerator
 
+1.3.6 - Increased the range of time and value in the mod-settings.
+Used DeepL to update translations for Russian
+
+
 1.3.5 - Added setting to turn off notification of created products.
 Used DeepL to update translations for Russian
 

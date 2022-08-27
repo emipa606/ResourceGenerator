@@ -73,16 +73,15 @@ internal class ResourceGeneratorMod : Mod
         listing_Standard.Begin(rect);
         listing_Standard.Gap();
         listing_Standard.Label(
-            "ReGe.GenerationTime.label".Translate(
-                (int)Math.Round(Settings.GenerationTime.min / (float)GenDate.TicksPerHour),
-                (int)Math.Round(Settings.GenerationTime.max / (float)GenDate.TicksPerHour)), -1f,
+            "ReGe.GenerationTime.label".Translate(Settings.GenerationTime.min.ToStringTicksToPeriod(),
+                Settings.GenerationTime.max.ToStringTicksToPeriod()), -1f,
             "ReGe.GenerationTime.tooltip".Translate());
-        listing_Standard.IntRange(ref Settings.GenerationTime, 1, 240000);
-        listing_Standard.Label("ReGe.GenerationValue.label".Translate(Settings.GenerationValue), -1,
+        listing_Standard.IntRange(ref Settings.GenerationTime, 1, 7 * GenDate.TicksPerDay);
+        listing_Standard.Label("ReGe.GenerationValue.label".Translate(), -1,
             "ReGe.GenerationValue.tooltip".Translate());
         Settings.GenerationValue = Widgets.HorizontalSlider(listing_Standard.GetRect(20), Settings.GenerationValue, 0,
-            500f,
-            false, "Float label", null, null, 1);
+            1000f,
+            false, Settings.GenerationValue.ToStringMoney(), null, null, 1);
         listing_Standard.Gap();
         listing_Standard.Label("ReGe.ExampleTitle.label".Translate());
         listing_Standard.Label(
