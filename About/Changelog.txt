@@ -1,5 +1,9 @@
 # Changelog for ResourceGenerator
 
+1.3.7 - Added option to turn off the confirmation dialog when changing product.
+Used DeepL to update translations for Russian
+
+
 1.3.6 - Increased the range of time and value in the mod-settings.
 Used DeepL to update translations for Russian
 

@@ -202,12 +202,20 @@ public class ResourceGenerator : Building
                 }
 
                 var textToAdd = thingDef.LabelCap;
-                list.Add(new FloatMenuOption(textToAdd, delegate
-                    {
-                        Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation(
-                            "ReGe.change.confirm".Translate(), delegate { setProduct(thingDef, true); }));
-                    }, getIcon(thingDef),
-                    getColor(thingDef), MenuOptionPriority.Default, null, null, 29f));
+                if (ResourceGeneratorMod.instance.Settings.ShowConfirmation)
+                {
+                    list.Add(new FloatMenuOption(textToAdd, delegate
+                        {
+                            Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation(
+                                "ReGe.change.confirm".Translate(), delegate { setProduct(thingDef, true); }));
+                        }, getIcon(thingDef),
+                        getColor(thingDef), MenuOptionPriority.Default, null, null, 29f));
+                }
+                else
+                {
+                    list.Add(new FloatMenuOption(textToAdd, delegate { setProduct(thingDef, true); }, getIcon(thingDef),
+                        getColor(thingDef), MenuOptionPriority.Default, null, null, 29f));
+                }
             }
             catch
             {

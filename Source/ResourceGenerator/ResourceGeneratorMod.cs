@@ -98,6 +98,7 @@ internal class ResourceGeneratorMod : Mod
         }
 
         listing_Standard.CheckboxLabeled("ReGe.ShowNotification.label".Translate(), ref Settings.ShowNotification);
+        listing_Standard.CheckboxLabeled("ReGe.ShowConfirmation.label".Translate(), ref Settings.ShowConfirmation);
 
         if (currentVersion != null)
         {
