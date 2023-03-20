@@ -200,8 +200,8 @@ public class CompResourceSpawner : ThingComp
 
     public override void PostExposeData()
     {
-        var str = PropsSpawner.saveKeysPrefix.NullOrEmpty() ? null : PropsSpawner.saveKeysPrefix + "_";
-        Scribe_Values.Look(ref ticksUntilSpawn, str + "ticksUntilSpawn");
+        var str = PropsSpawner.saveKeysPrefix.NullOrEmpty() ? null : $"{PropsSpawner.saveKeysPrefix}_";
+        Scribe_Values.Look(ref ticksUntilSpawn, $"{str}ticksUntilSpawn");
     }
 
     public override IEnumerable<Gizmo> CompGetGizmosExtra()
@@ -210,7 +210,7 @@ public class CompResourceSpawner : ThingComp
         {
             yield return new Command_Action
             {
-                defaultLabel = "DEBUG: Spawn " + ((ResourceGenerator)parent).CurrentProduct.label,
+                defaultLabel = $"DEBUG: Spawn {((ResourceGenerator)parent).CurrentProduct.label}",
                 icon = TexCommand.DesirePower,
                 action = delegate
                 {
@@ -225,11 +225,10 @@ public class CompResourceSpawner : ThingComp
     {
         if (PropsSpawner.writeTimeLeftToSpawn && (!PropsSpawner.requiresPower || PowerOn))
         {
-            return "NextSpawnedItemIn"
-                       .Translate(GenLabel.ThingLabel(((ResourceGenerator)parent).CurrentProduct, null,
-                           ((ResourceGenerator)parent).CurrentAmount))
-                       .Resolve() +
-                   ": " + ticksUntilSpawn.ToStringTicksToPeriod().Colorize(ColoredText.DateTimeColor);
+            return $"{"NextSpawnedItemIn"
+                .Translate(GenLabel.ThingLabel(((ResourceGenerator)parent).CurrentProduct, null,
+                    ((ResourceGenerator)parent).CurrentAmount))
+                .Resolve()}: {ticksUntilSpawn.ToStringTicksToPeriod().Colorize(ColoredText.DateTimeColor)}";
         }
 
         return null;

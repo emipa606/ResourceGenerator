@@ -22,7 +22,7 @@ internal class ResourceGeneratorMod : Mod
     /// <summary>
     ///     The private settings
     /// </summary>
-    private ResourceGeneratorSettings settings;
+    public readonly ResourceGeneratorSettings Settings;
 
     /// <summary>
     ///     Constructor
@@ -31,27 +31,10 @@ internal class ResourceGeneratorMod : Mod
     public ResourceGeneratorMod(ModContentPack content) : base(content)
     {
         instance = this;
-        currentVersion =
-            VersionFromManifest.GetVersionFromModMetaData(
-                ModLister.GetActiveModWithIdentifier("Mlie.ResourceGenerator"));
+        currentVersion = VersionFromManifest.GetVersionFromModMetaData(content.ModMetaData);
+        Settings = GetSettings<ResourceGeneratorSettings>();
     }
 
-    /// <summary>
-    ///     The instance-settings for the mod
-    /// </summary>
-    internal ResourceGeneratorSettings Settings
-    {
-        get
-        {
-            if (settings == null)
-            {
-                settings = GetSettings<ResourceGeneratorSettings>();
-            }
-
-            return settings;
-        }
-        set => settings = value;
-    }
 
     /// <summary>
     ///     The title for the mod-settings
@@ -79,7 +62,8 @@ internal class ResourceGeneratorMod : Mod
         listing_Standard.IntRange(ref Settings.GenerationTime, 1, 7 * GenDate.TicksPerDay);
         listing_Standard.Label("ReGe.GenerationValue.label".Translate(), -1,
             "ReGe.GenerationValue.tooltip".Translate());
-        Settings.GenerationValue = Widgets.HorizontalSlider(listing_Standard.GetRect(20), Settings.GenerationValue, 0,
+        Settings.GenerationValue = Widgets.HorizontalSlider_NewTemp(listing_Standard.GetRect(20),
+            Settings.GenerationValue, 0,
             1000f,
             false, Settings.GenerationValue.ToStringMoney(), null, null, 1);
         listing_Standard.Gap();

@@ -15,7 +15,39 @@ public class ResourceGenerator : Building
     private Color currentColor;
     private Texture2D currentIcon;
     private ThingDef currentProduct;
+    private CompFlickable flickableComp;
+    private int lastCount;
+    private int limit;
+    private CompPowerTrader powerTraderComp;
     private CompResourceSpawner spawner;
+
+    public CompFlickable FlickableComp
+    {
+        get
+        {
+            if (flickableComp == null)
+            {
+                flickableComp = GetComp<CompFlickable>();
+            }
+
+            return flickableComp;
+        }
+        set => flickableComp = value;
+    }
+
+    public CompPowerTrader PowerTraderComp
+    {
+        get
+        {
+            if (powerTraderComp == null)
+            {
+                powerTraderComp = GetComp<CompPowerTrader>();
+            }
+
+            return powerTraderComp;
+        }
+        set => powerTraderComp = value;
+    }
 
     public CompResourceSpawner Spawner
     {
@@ -95,11 +127,17 @@ public class ResourceGenerator : Building
         set => currentColor = value;
     }
 
+
+    private bool ControlIsHeld => Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
+
+    private bool ShiftIsHeld => Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+
     public override void ExposeData()
     {
         base.ExposeData();
         Scribe_Defs.Look(ref currentProduct, "currentProduct");
         Scribe_Values.Look(ref currentAmount, "currentAmount");
+        Scribe_Values.Look(ref limit, "limit");
     }
 
     public override void SpawnSetup(Map map, bool respawningAfterLoad)
@@ -127,6 +165,23 @@ public class ResourceGenerator : Building
         Graphics.DrawMesh(MeshPool.plane10, matrix, material, 0);
     }
 
+    public override string GetInspectString()
+    {
+        var baseInspectString = base.GetInspectString();
+
+        if (limit == 0)
+        {
+            return $"{baseInspectString}\n" + "ReGe.unlimited".Translate();
+        }
+
+        var limitString = "ReGe.limitedto".Translate(limit);
+        limitString += verifyLimit()
+            ? "ReGe.limitednotreached".Translate(lastCount)
+            : "ReGe.limitedreached".Translate(lastCount);
+
+        return $"{baseInspectString}\n" + limitString;
+    }
+
     public override IEnumerable<Gizmo> GetGizmos()
     {
         foreach (var gizmo in base.GetGizmos())
@@ -145,15 +200,134 @@ public class ResourceGenerator : Building
             defaultIconColor = CurrentColor,
             defaultLabel = CurrentProduct.LabelCap
         };
+        if (limit > 0)
+        {
+            yield return new Command_Action
+            {
+                action = delegate
+                {
+                    foreach (var selectedObject in Find.Selector.SelectedObjects)
+                    {
+                        if (selectedObject is not ResourceGenerator resourceGenerator)
+                        {
+                            continue;
+                        }
+
+                        if (ControlIsHeld)
+                        {
+                            resourceGenerator.DecreaseBy(1);
+                            continue;
+                        }
+
+                        if (ShiftIsHeld)
+                        {
+                            resourceGenerator.DecreaseBy(100);
+                            continue;
+                        }
+
+                        resourceGenerator.DecreaseBy(10);
+                    }
+                },
+                defaultDesc = "ReGe.decreaseLimittt".Translate(),
+                icon = TexButton.ReorderDown,
+                defaultLabel = "ReGe.decreaseLimit".Translate()
+            };
+        }
+
+        yield return new Command_Action
+        {
+            action = delegate
+            {
+                foreach (var selectedObject in Find.Selector.SelectedObjects)
+                {
+                    if (selectedObject is not ResourceGenerator resourceGenerator)
+                    {
+                        continue;
+                    }
+
+                    if (ControlIsHeld)
+                    {
+                        resourceGenerator.IncreaseBy(1);
+                        continue;
+                    }
+
+                    if (ShiftIsHeld)
+                    {
+                        resourceGenerator.IncreaseBy(100);
+                        continue;
+                    }
+
+                    resourceGenerator.IncreaseBy(10);
+                }
+            },
+            defaultDesc = "ReGe.increaseLimittt".Translate(),
+            icon = TexButton.ReorderUp,
+            defaultLabel = "ReGe.increaseLimit".Translate()
+        };
+    }
+
+    public void IncreaseBy(int amount)
+    {
+        limit += amount;
+        verifyLimit();
+    }
+
+    public void DecreaseBy(int amount)
+    {
+        limit = Math.Max(0, limit - amount);
+        verifyLimit(limit == 0);
     }
 
     public override void Tick()
     {
         base.Tick();
-        if (GenTicks.TicksGame % GenTicks.TickRareInterval == 0 && GetComp<CompPowerTrader>().PowerOn)
+        if (GenTicks.TicksGame % GenTicks.TickRareInterval != 0)
+        {
+            return;
+        }
+
+        if (PowerTraderComp.PowerOn)
         {
             FleckMaker.ThrowSmoke(DrawPos, Map, 1f);
         }
+
+        verifyLimit();
+    }
+
+    private bool verifyLimit(bool reset = false)
+    {
+        if (CurrentProduct == null)
+        {
+            return false;
+        }
+
+        if (limit == 0)
+        {
+            if (reset && !FlickableComp.SwitchIsOn)
+            {
+                FlickableComp.DoFlick();
+            }
+
+            return true;
+        }
+
+        lastCount = Map.resourceCounter.GetCount(CurrentProduct);
+        if (lastCount < limit)
+        {
+            if (!FlickableComp.SwitchIsOn)
+            {
+                FlickableComp.DoFlick();
+            }
+
+            return true;
+        }
+
+        if (FlickableComp.SwitchIsOn)
+        {
+            FlickableComp.DoFlick();
+        }
+
+        return false;
     }
 
     private void setProduct(ThingDef thingToSet, bool reset)
@@ -183,6 +357,8 @@ public class ResourceGenerator : Building
                 resourceGenerator.Spawner.PostSpawnSetup(false);
             }
         }
+
+        verifyLimit();
     }
 
 

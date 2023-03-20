@@ -3,6 +3,14 @@
   <ReGe.change.confirm>Selecting a new product will remove all current progress. Continue?</ReGe.change.confirm>
   <ReGe.norecipes>No available recipes</ReGe.norecipes>
   <ReGe.product>Product to generate</ReGe.product>
+  <ReGe.increaseLimit>Increase limit</ReGe.increaseLimit>
+  <ReGe.increaseLimittt>Click to increse by 10, hold CTRL to increase by 1, hold SHIFT to increase by 100</ReGe.increaseLimittt>
+  <ReGe.decreaseLimit>Decrease limit</ReGe.decreaseLimit>
+  <ReGe.decreaseLimittt>Click to decrese by 10, hold CTRL to decrease by 1, hold SHIFT to decrease by 100</ReGe.decreaseLimittt>
+  <ReGe.unlimited>Unlimited production</ReGe.unlimited>
+  <ReGe.limitedto>Produce until you have {0}</ReGe.limitedto>
+  <ReGe.limitedreached>, limit reached ({0})</ReGe.limitedreached>
+  <ReGe.limitednotreached>, currently {0}</ReGe.limitednotreached>
   <ReGe.GenerationTime.label>Timespan for generating: {0} to {1}</ReGe.GenerationTime.label>
   <ReGe.GenerationTime.tooltip>Each cycle will require a random value in this range.</ReGe.GenerationTime.tooltip>
   <ReGe.GenerationValue.label>Marketvalue to generate</ReGe.GenerationValue.label>
