@@ -1,5 +1,8 @@
 # Changelog for ResourceGenerator
 
+1.4.3 - Added an improved generator, capable of producing 2,5 times the resources.
+
+
 1.4.2 - Added option to limit the amount to generate.
 Used DeepL to update translations for ChineseSimplified, French, German, Russian
 

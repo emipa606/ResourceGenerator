@@ -92,6 +92,7 @@ public class ResourceGenerator : Building
             }
 
             currentAmount = amountToSpawn(CurrentProduct);
+            currentAmount = (int)Math.Round(currentAmount * Spawner.PropsSpawner.generationFactor);
             return currentAmount;
         }
         set => currentAmount = value;

@@ -10,6 +10,19 @@
       <li>Electricity</li>
     </prerequisites>
     <researchViewX>6.00</researchViewX>
-    <researchViewY>5.05</researchViewY>
+    <researchViewY>4.80</researchViewY>
+  </ResearchProjectDef>
+  <ResearchProjectDef>
+    <defName>ImprovedResourceGenerator</defName>
+    <label>improved resource generator</label>
+    <description>Enables improved resource generators, capable of generating 2,5 times the amount of resources in the same time.</description>
+    <baseCost>3000</baseCost>
+    <techLevel>Spacer</techLevel>
+    <prerequisites>
+      <li>MicroelectronicsBasics</li>
+      <li>BasicResourceGenerator</li>
+    </prerequisites>
+    <researchViewX>12.00</researchViewX>
+    <researchViewY>5.30</researchViewY>
   </ResearchProjectDef>
 </Defs>
