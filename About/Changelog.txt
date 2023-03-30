@@ -1,5 +1,8 @@
 # Changelog for ResourceGenerator
 
+1.4.4 - Fixed resources only spawning one stack.
+
+
 1.4.3 - Added an improved generator, capable of producing 2,5 times the resources.
 
 

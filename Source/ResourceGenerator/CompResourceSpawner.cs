@@ -86,57 +86,41 @@ public class CompResourceSpawner : ThingComp
 
         var product = ((ResourceGenerator)parent).CurrentProduct;
         var amount = ((ResourceGenerator)parent).CurrentAmount;
-        if (PropsSpawner.spawnMaxAdjacent >= 0)
+
+        while (amount > 0)
         {
-            var num = 0;
-            for (var i = 0; i < 9; i++)
+            var amountToSpawn = amount;
+            if (amount > product.stackLimit)
             {
-                var c = parent.Position + GenAdj.AdjacentCellsAndInside[i];
-                if (!c.InBounds(parent.Map))
-                {
-                    continue;
-                }
-
-                var thingList = c.GetThingList(parent.Map);
-                foreach (var currentThing in thingList)
-                {
-                    if (currentThing.def != product)
-                    {
-                        continue;
-                    }
-
-                    num += currentThing.stackCount;
-                    if (num >= PropsSpawner.spawnMaxAdjacent)
-                    {
-                        return false;
-                    }
-                }
+                amountToSpawn = product.stackLimit;
             }
-        }
 
-        if (!CompSpawner.TryFindSpawnCell(parent, product, amount, out var center))
-        {
-            return false;
-        }
+            if (!CompSpawner.TryFindSpawnCell(parent, product, amountToSpawn, out var center))
+            {
+                return false;
+            }
 
-        var thing = ThingMaker.MakeThing(product);
-        thing.stackCount = amount;
+            var thing = ThingMaker.MakeThing(product);
+            thing.stackCount = amountToSpawn;
 
-        if (PropsSpawner.inheritFaction && thing.Faction != parent.Faction)
-        {
-            thing.SetFaction(parent.Faction);
-        }
+            if (PropsSpawner.inheritFaction && thing.Faction != parent.Faction)
+            {
+                thing.SetFaction(parent.Faction);
+            }
 
-        GenPlace.TryPlaceThing(thing, center, parent.Map, ThingPlaceMode.Direct, out var t);
-        if (PropsSpawner.spawnForbidden)
-        {
-            t.SetForbidden(true);
+            GenPlace.TryPlaceThing(thing, center, parent.Map, ThingPlaceMode.Direct, out var t);
+            if (PropsSpawner.spawnForbidden)
+            {
+                t.SetForbidden(true);
+            }
+
+            amount -= amountToSpawn;
         }
 
         if (ResourceGeneratorMod.instance.Settings.ShowNotification && PropsSpawner.showMessageIfOwned &&
             parent.Faction == Faction.OfPlayer)
         {
-            Messages.Message("MessageCompSpawnerSpawnedItem".Translate(product.LabelCap), thing,
+            Messages.Message("MessageCompSpawnerSpawnedItem".Translate(product.LabelCap), parent,
                 MessageTypeDefOf.PositiveEvent);
         }
 
