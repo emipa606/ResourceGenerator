@@ -35,8 +35,6 @@ public class Main
             .Where(def => def.IsStuff));
         ValidResources.AddRange(DefDatabase<ThingDef>.AllDefsListForReading
             .Where(def => def.mineable).Select(def => def.building.mineableThing));
-        //ValidResources.AddRange(DefDatabase<ThingDef>.AllDefsListForReading
-        //    .Where(def => def.recipeMaker != null && def.stackLimit > 1));
         Log.Message($"[ResourceGenerator]: Added {ValidResources.Count} resources as possible to generate");
     }
 }

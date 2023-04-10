@@ -4,7 +4,8 @@ namespace ResourceGenerator;
 
 public class CompProperties_ResourceSpawner : CompProperties
 {
-    public float generationFactor = 1;
+    public float generationFactor;
+
     public bool inheritFaction;
 
     public bool requiresPower;

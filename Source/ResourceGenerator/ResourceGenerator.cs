@@ -91,8 +91,7 @@ public class ResourceGenerator : Building
                 return currentAmount;
             }
 
-            currentAmount = amountToSpawn(CurrentProduct);
-            currentAmount = (int)Math.Round(currentAmount * Spawner.PropsSpawner.generationFactor);
+            currentAmount = amountToSpawn(CurrentProduct, Spawner.PropsSpawner.generationFactor);
             return currentAmount;
         }
         set => currentAmount = value;
@@ -352,7 +351,7 @@ public class ResourceGenerator : Building
             }
 
             resourceGenerator.CurrentProduct = thingToSet;
-            resourceGenerator.CurrentAmount = amountToSpawn(CurrentProduct);
+            resourceGenerator.CurrentAmount = amountToSpawn(CurrentProduct, Spawner.PropsSpawner.generationFactor);
             if (reset)
             {
                 resourceGenerator.Spawner.PostSpawnSetup(false);
@@ -378,7 +377,13 @@ public class ResourceGenerator : Building
                     continue;
                 }
 
-                var textToAdd = thingDef.LabelCap;
+                var amount = amountToSpawn(thingDef, Spawner.PropsSpawner.generationFactor);
+                if (amount == 0)
+                {
+                    continue;
+                }
+
+                var textToAdd = $"{thingDef.LabelCap} x{amount}";
                 if (ResourceGeneratorMod.instance.Settings.ShowConfirmation)
                 {
                     list.Add(new FloatMenuOption(textToAdd, delegate
@@ -410,10 +415,11 @@ public class ResourceGenerator : Building
         Find.WindowStack.Add(new FloatMenu(sortedList));
     }
 
-    private static int amountToSpawn(ThingDef thingDef)
+    private static int amountToSpawn(ThingDef thingDef, float factor)
     {
         var itemWorh = thingDef.GetStatValueAbstract(StatDefOf.MarketValue);
-        return (int)Math.Round(ResourceGeneratorMod.instance.Settings.GenerationValue / itemWorh);
+        var valueToGenerate = ResourceGeneratorMod.instance.Settings.GenerationValue * factor;
+        return (int)Math.Floor(valueToGenerate / itemWorh);
     }
 
     private static Texture2D getIcon(ThingDef thingDef)

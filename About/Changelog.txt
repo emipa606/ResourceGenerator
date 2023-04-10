@@ -1,5 +1,8 @@
 # Changelog for ResourceGenerator
 
+1.4.5 - Will not make items that are above the value limit, fixed the advanced generator (again)
+
+
 1.4.4 - Fixed resources only spawning one stack.
 
 
