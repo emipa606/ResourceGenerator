@@ -1,5 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
+
   <ResourceGenerator.label>Генератор ресурсов</ResourceGenerator.label>
   <ResourceGenerator.description>Медленно производит выбранный ресурс каждые два дня.</ResourceGenerator.description>
+  <ResourceGenerator_Blueprint.label>генератор ресурсов (чертеж)</ResourceGenerator_Blueprint.label>
+  <ResourceGenerator_Frame.label>генератор ресурсов (строительство)</ResourceGenerator_Frame.label>
+  <ResourceGenerator_Frame.description>Медленно производит выбранный ресурс каждые два дня.</ResourceGenerator_Frame.description>
+
+  <ImprovedResourceGenerator.label>Улучшенный генератор ресурсов</ImprovedResourceGenerator.label>
+  <ImprovedResourceGenerator.description>Медленно производит выбранный ресурс каждые два дня. Генерирует в 2,5 раза больше, чем обычный генератор.</ImprovedResourceGenerator.description>
+  <ImprovedResourceGenerator_Blueprint.label>улучшенный генератор ресурсов (чертеж)</ImprovedResourceGenerator_Blueprint.label>
+  <ImprovedResourceGenerator_Frame.label>улучшенный генератор ресурсов (строительство)</ImprovedResourceGenerator_Frame.label>
+  <ImprovedResourceGenerator_Frame.description>Медленно производит выбранный ресурс каждые два дня. Генерирует в 2,5 раза больше, чем обычный генератор.</ImprovedResourceGenerator_Frame.description>
+
+  
 </LanguageData>
