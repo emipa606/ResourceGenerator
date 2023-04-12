@@ -64,7 +64,7 @@ internal class ResourceGeneratorMod : Mod
             "ReGe.GenerationValue.tooltip".Translate());
         Settings.GenerationValue = Widgets.HorizontalSlider_NewTemp(listing_Standard.GetRect(20),
             Settings.GenerationValue, 0,
-            1000f,
+            2500f,
             false, Settings.GenerationValue.ToStringMoney(), null, null, 1);
         listing_Standard.Gap();
         listing_Standard.Label("ReGe.ExampleTitle.label".Translate());

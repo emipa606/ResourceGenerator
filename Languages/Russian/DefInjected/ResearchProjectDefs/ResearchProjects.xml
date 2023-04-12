@@ -1,10 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-
   <BasicResourceGenerator.label>Генератор ресурсов</BasicResourceGenerator.label>
   <BasicResourceGenerator.description>Открывает возможность постройки генераторов, которые будут производить ресурсы до тех пор, пока подключены к электрической сети.</BasicResourceGenerator.description>
-
   <ImprovedResourceGenerator.label>Улучшенный генератор ресурсов</ImprovedResourceGenerator.label>
   <ImprovedResourceGenerator.description>Улучшенный генератор ресурсов, способный генерировать в 2,5 раза больше ресурсов за то же время.</ImprovedResourceGenerator.description>
-
 </LanguageData>
