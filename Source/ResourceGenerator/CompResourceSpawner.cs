@@ -10,6 +10,7 @@ public class CompResourceSpawner : ThingComp
 
     public CompProperties_ResourceSpawner PropsSpawner => (CompProperties_ResourceSpawner)props;
 
+
     private bool PowerOn
     {
         get
@@ -95,7 +96,7 @@ public class CompResourceSpawner : ThingComp
                 amountToSpawn = product.stackLimit;
             }
 
-            if (!CompSpawner.TryFindSpawnCell(parent, product, amountToSpawn, out var center))
+            if (!TryFindSpawnCell(product, amountToSpawn, out var outputTile))
             {
                 return false;
             }
@@ -108,7 +109,7 @@ public class CompResourceSpawner : ThingComp
                 thing.SetFaction(parent.Faction);
             }
 
-            GenPlace.TryPlaceThing(thing, center, parent.Map, ThingPlaceMode.Direct, out var t);
+            GenPlace.TryPlaceThing(thing, outputTile, parent.Map, ThingPlaceMode.Direct, out var t);
             if (PropsSpawner.spawnForbidden)
             {
                 t.SetForbidden(true);
@@ -127,44 +128,19 @@ public class CompResourceSpawner : ThingComp
         return true;
     }
 
-    public static bool TryFindSpawnCell(Thing parent, ThingDef thingToSpawn, int spawnCount, out IntVec3 result)
+    public bool TryFindSpawnCell(ThingDef thingToSpawn, int spawnCount, out IntVec3 result)
     {
-        foreach (var intVec in GenAdj.CellsAdjacent8Way(parent).InRandomOrder())
+        result = IntVec3.Invalid;
+        if (((ResourceGenerator)parent).IsValidSpawnCell(((ResourceGenerator)parent).OutputTile, thingToSpawn,
+                spawnCount))
         {
-            if (!intVec.Walkable(parent.Map))
-            {
-                continue;
-            }
+            result = ((ResourceGenerator)parent).OutputTile;
+            return true;
+        }
 
-            var edifice = intVec.GetEdifice(parent.Map);
-            if (edifice != null && thingToSpawn.IsEdifice())
-            {
-                continue;
-            }
-
-            if (edifice is Building_Door { FreePassage: false } ||
-                parent.def.passability != Traversability.Impassable &&
-                !GenSight.LineOfSight(parent.Position, intVec, parent.Map))
-            {
-                continue;
-            }
-
-            var noGoodCell = false;
-            var thingList = intVec.GetThingList(parent.Map);
-            foreach (var thing in thingList)
-            {
-                if (thing.def.category != ThingCategory.Item || thing.def == thingToSpawn &&
-                    thing.stackCount <=
-                    thingToSpawn.stackLimit - spawnCount)
-                {
-                    continue;
-                }
-
-                noGoodCell = true;
-                break;
-            }
-
-            if (noGoodCell)
+        foreach (var intVec in ((ResourceGenerator)parent).ValidCells)
+        {
+            if (!((ResourceGenerator)parent).IsValidSpawnCell(intVec, thingToSpawn, spawnCount))
             {
                 continue;
             }
@@ -190,6 +166,26 @@ public class CompResourceSpawner : ThingComp
 
     public override IEnumerable<Gizmo> CompGetGizmosExtra()
     {
+        foreach (var gizmosExtra in base.CompGetGizmosExtra())
+        {
+            yield return gizmosExtra;
+        }
+
+        yield return new Command_Action
+        {
+            defaultLabel = "ReGe.RotateOutput.label".Translate(),
+            action = delegate
+            {
+                if (!parent.Spawned)
+                {
+                    return;
+                }
+
+                ((ResourceGenerator)parent).NextOutputTile();
+            },
+            icon = TexUI.RotLeftTex
+        };
+
         if (Prefs.DevMode)
         {
             yield return new Command_Action

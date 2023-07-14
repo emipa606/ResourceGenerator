@@ -24,4 +24,5 @@
   <ReGe.ShowConfirmation.label>改变产品时显示确认</ReGe.ShowConfirmation.label>
   <ReGe.Reset.label>复位</ReGe.Reset.label>
   <ReGe.Version.label>已安装的mod-version。{0}</ReGe.Version.label>
+  <ReGe.RotateOutput.label>旋转输出</ReGe.RotateOutput.label>
 </LanguageData>

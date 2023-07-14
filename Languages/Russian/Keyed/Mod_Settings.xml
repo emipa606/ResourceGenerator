@@ -26,4 +26,5 @@
   <ReGe.limitedto>Размножайтесь до тех пор, пока у вас не останется {0}</ReGe.limitedto>
   <ReGe.limitedreached>, предел достигнут ({0})</ReGe.limitedreached>
   <ReGe.limitednotreached>, в настоящее время {0}</ReGe.limitednotreached>
+  <ReGe.RotateOutput.label>Поворот выхода</ReGe.RotateOutput.label>
 </LanguageData>

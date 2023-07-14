@@ -22,5 +22,6 @@
   <ReGe.ShowNotification.label>Show notification when creating a product</ReGe.ShowNotification.label>
   <ReGe.ShowConfirmation.label>Show confirmation when changing products</ReGe.ShowConfirmation.label>
   <ReGe.Reset.label>Reset</ReGe.Reset.label>
+  <ReGe.RotateOutput.label>Rotate output</ReGe.RotateOutput.label>
   <ReGe.Version.label>Installed mod-version: {0}</ReGe.Version.label>
 </LanguageData>

@@ -24,4 +24,5 @@
   <ReGe.ShowConfirmation.label>Afficher la confirmation lors d'un changement de produit</ReGe.ShowConfirmation.label>
   <ReGe.Reset.label>Remise à zéro</ReGe.Reset.label>
   <ReGe.Version.label>Version de mod installée : {0}</ReGe.Version.label>
+  <ReGe.RotateOutput.label>Rotation de la sortie</ReGe.RotateOutput.label>
 </LanguageData>

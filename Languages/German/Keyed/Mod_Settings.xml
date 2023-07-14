@@ -24,4 +24,5 @@
   <ReGe.ShowConfirmation.label>Bestätigung bei Produktwechsel anzeigen</ReGe.ShowConfirmation.label>
   <ReGe.Reset.label>Zurücksetzen</ReGe.Reset.label>
   <ReGe.Version.label>Installierte Mod-Version: {0}</ReGe.Version.label>
+  <ReGe.RotateOutput.label>Ausgang rotieren</ReGe.RotateOutput.label>
 </LanguageData>

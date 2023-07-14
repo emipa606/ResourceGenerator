@@ -18,8 +18,10 @@ public class ResourceGenerator : Building
     private CompFlickable flickableComp;
     private int lastCount;
     private int limit;
+    private IntVec3 outputTile;
     private CompPowerTrader powerTraderComp;
     private CompResourceSpawner spawner;
+    private List<IntVec3> validCells;
 
     public CompFlickable FlickableComp
     {
@@ -33,6 +35,19 @@ public class ResourceGenerator : Building
             return flickableComp;
         }
         set => flickableComp = value;
+    }
+
+    public List<IntVec3> ValidCells
+    {
+        get
+        {
+            if (validCells == null)
+            {
+                validCells = GenAdj.CellsAdjacent8Way(this).ToList();
+            }
+
+            return validCells;
+        }
     }
 
     public CompPowerTrader PowerTraderComp
@@ -97,6 +112,20 @@ public class ResourceGenerator : Building
         set => currentAmount = value;
     }
 
+    public IntVec3 OutputTile
+    {
+        get
+        {
+            if (outputTile == IntVec3.Invalid)
+            {
+                outputTile = ValidCells.RandomElement();
+            }
+
+            return outputTile;
+        }
+        set => outputTile = value;
+    }
+
     public Texture2D CurrentIcon
     {
         get
@@ -137,6 +166,7 @@ public class ResourceGenerator : Building
         base.ExposeData();
         Scribe_Defs.Look(ref currentProduct, "currentProduct");
         Scribe_Values.Look(ref currentAmount, "currentAmount");
+        Scribe_Values.Look(ref outputTile, "outputTile");
         Scribe_Values.Look(ref limit, "limit");
     }
 
@@ -144,6 +174,10 @@ public class ResourceGenerator : Building
     {
         base.SpawnSetup(map, respawningAfterLoad);
         setProduct(CurrentProduct, false);
+        if (!respawningAfterLoad)
+        {
+            NextOutputTile();
+        }
     }
 
     public override void Draw()
@@ -163,6 +197,12 @@ public class ResourceGenerator : Building
         matrix.SetTRS(iconLocation, Quaternion.identity, iconSize);
         var material = MaterialPool.MatFrom(icon, ShaderDatabase.Transparent, color);
         Graphics.DrawMesh(MeshPool.plane10, matrix, material, 0);
+    }
+
+    public override void DrawExtraSelectionOverlays()
+    {
+        base.DrawExtraSelectionOverlays();
+        GenDraw.DrawFieldEdges(new List<IntVec3> { OutputTile }, Color.green);
     }
 
     public override string GetInspectString()
@@ -292,6 +332,66 @@ public class ResourceGenerator : Building
         }
 
         verifyLimit();
+    }
+
+    public void NextOutputTile()
+    {
+        var currentIndex = ValidCells.IndexOf(OutputTile);
+
+        foreach (var unused in ValidCells)
+        {
+            if (currentIndex + 1 == ValidCells.Count)
+            {
+                currentIndex = 0;
+            }
+            else
+            {
+                currentIndex++;
+            }
+
+            if (!IsValidSpawnCell(ValidCells[currentIndex], CurrentProduct, CurrentAmount))
+            {
+                continue;
+            }
+
+            OutputTile = ValidCells[currentIndex];
+            return;
+        }
+    }
+
+    public bool IsValidSpawnCell(IntVec3 intVec, ThingDef thingToSpawn, int spawnCount)
+    {
+        if (!intVec.Walkable(Map))
+        {
+            return false;
+        }
+
+        var edifice = intVec.GetEdifice(Map);
+        if (edifice != null && thingToSpawn.IsEdifice())
+        {
+            return false;
+        }
+
+        if (edifice is Building_Door { FreePassage: false } ||
+            def.passability != Traversability.Impassable &&
+            !GenSight.LineOfSight(Position, intVec, Map))
+        {
+            return false;
+        }
+
+        var thingList = intVec.GetThingList(Map);
+        foreach (var thing in thingList)
+        {
+            if (thing.def.category != ThingCategory.Item || thing.def == thingToSpawn &&
+                thing.stackCount <= thingToSpawn.stackLimit - spawnCount)
+            {
+                continue;
+            }
+
+            return false;
+        }
+
+        return true;
     }
 
     private bool verifyLimit(bool reset = false)

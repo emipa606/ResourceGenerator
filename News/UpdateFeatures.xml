@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<HugsLib.UpdateFeatureDef Abstract="true" Name="ResourceGenerator_UpdateFeatureBase">
+		<modNameReadable>ResourceGenerator</modNameReadable>
+		<linkUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2747511650</linkUrl>
+	</HugsLib.UpdateFeatureDef>
+	<HugsLib.UpdateFeatureDef ParentName="ResourceGenerator_UpdateFeatureBase">
+		<defName>ResourceGenerator_1_4_7</defName>
+		<assemblyVersion>1.4.7</assemblyVersion>
+		<content>The generators now has a defined output-tile.
+If the defined tile cannot be spawned in the resource will be spawned in any other possible tile.</content>
+	</HugsLib.UpdateFeatureDef>
+</Defs>
+
