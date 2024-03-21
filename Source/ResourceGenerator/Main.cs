@@ -30,7 +30,7 @@ public class Main
             ThingDefOf.ComponentIndustrial.GetStatValueAbstract(StatDefOf.MarketValue);
         ResourceGeneratorMod.woodWorth = ThingDefOf.WoodLog.GetStatValueAbstract(StatDefOf.MarketValue);
 
-        ValidResources = new HashSet<ThingDef>();
+        ValidResources = [];
         ValidResources.AddRange(DefDatabase<ThingDef>.AllDefsListForReading
             .Where(def => def.IsStuff));
         ValidResources.AddRange(DefDatabase<ThingDef>.AllDefsListForReading

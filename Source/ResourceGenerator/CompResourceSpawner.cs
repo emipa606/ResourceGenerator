@@ -78,11 +78,11 @@ public class CompResourceSpawner : ThingComp
         TryDoSpawn();
     }
 
-    public bool TryDoSpawn()
+    public void TryDoSpawn()
     {
         if (!parent.Spawned)
         {
-            return false;
+            return;
         }
 
         var product = ((ResourceGenerator)parent).CurrentProduct;
@@ -98,7 +98,7 @@ public class CompResourceSpawner : ThingComp
 
             if (!TryFindSpawnCell(product, amountToSpawn, out var outputTile))
             {
-                return false;
+                return;
             }
 
             var thing = ThingMaker.MakeThing(product);
@@ -124,8 +124,6 @@ public class CompResourceSpawner : ThingComp
             Messages.Message("MessageCompSpawnerSpawnedItem".Translate(product.LabelCap), parent,
                 MessageTypeDefOf.PositiveEvent);
         }
-
-        return true;
     }
 
     public bool TryFindSpawnCell(ThingDef thingToSpawn, int spawnCount, out IntVec3 result)

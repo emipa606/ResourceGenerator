@@ -180,10 +180,10 @@ public class ResourceGenerator : Building
         }
     }
 
-    public override void Draw()
+    protected override void DrawAt(Vector3 drawLoc, bool flip = false)
     {
-        base.Draw();
-        var iconLocation = DrawPos + iconOffset;
+        base.DrawAt(drawLoc, flip);
+        var iconLocation = drawLoc + iconOffset;
         var color = Color.white;
         var icon = Main.NoPower;
         if (GetComp<CompPowerTrader>().PowerOn)
@@ -202,7 +202,7 @@ public class ResourceGenerator : Building
     public override void DrawExtraSelectionOverlays()
     {
         base.DrawExtraSelectionOverlays();
-        GenDraw.DrawFieldEdges(new List<IntVec3> { OutputTile }, Color.green);
+        GenDraw.DrawFieldEdges([OutputTile], Color.green);
     }
 
     public override string GetInspectString()

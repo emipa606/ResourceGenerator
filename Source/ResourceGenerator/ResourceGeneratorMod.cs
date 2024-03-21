@@ -62,7 +62,7 @@ internal class ResourceGeneratorMod : Mod
         listing_Standard.IntRange(ref Settings.GenerationTime, 1, 7 * GenDate.TicksPerDay);
         listing_Standard.Label("ReGe.GenerationValue.label".Translate(), -1,
             "ReGe.GenerationValue.tooltip".Translate());
-        Settings.GenerationValue = Widgets.HorizontalSlider_NewTemp(listing_Standard.GetRect(20),
+        Settings.GenerationValue = Widgets.HorizontalSlider(listing_Standard.GetRect(20),
             Settings.GenerationValue, 0,
             2500f,
             false, Settings.GenerationValue.ToStringMoney(), null, null, 1);
