@@ -7,6 +7,7 @@ namespace ResourceGenerator;
 /// </summary>
 internal class ResourceGeneratorSettings : ModSettings
 {
+    public int DefaultLimit;
     public IntRange GenerationTime;
     public float GenerationValue;
     public bool ShowConfirmation = true;
@@ -18,6 +19,7 @@ internal class ResourceGeneratorSettings : ModSettings
     public override void ExposeData()
     {
         base.ExposeData();
+        Scribe_Values.Look(ref DefaultLimit, "DefaultLimit");
         Scribe_Values.Look(ref GenerationTime, "GenerationTime");
         Scribe_Values.Look(ref GenerationValue, "GenerationValue");
         Scribe_Values.Look(ref ShowNotification, "ShowNotification", true);

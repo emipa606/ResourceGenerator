@@ -1,5 +1,9 @@
 # Changelog for ResourceGenerator
 
+1.5.1 - Added an option to set the default limit on newly built generators
+Used DeepL to update translations for ChineseSimplified, French, German, Russian
+
+
 1.5.0 - Mod updated for 1.5 and passed autotests
 
 

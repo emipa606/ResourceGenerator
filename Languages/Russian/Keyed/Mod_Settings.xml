@@ -27,4 +27,6 @@
   <ReGe.limitedreached>, предел достигнут ({0})</ReGe.limitedreached>
   <ReGe.limitednotreached>, в настоящее время {0}</ReGe.limitednotreached>
   <ReGe.RotateOutput.label>Поворот выхода</ReGe.RotateOutput.label>
+  <ReGe.DefaultLimit.label>Предел по умолчанию: {0}</ReGe.DefaultLimit.label>
+  <ReGe.DefaultLimit.tooltip>При создании новых генераторов это значение будет установлено в качестве предела. 0 устанавливает неограниченное количество</ReGe.DefaultLimit.tooltip>
 </LanguageData>

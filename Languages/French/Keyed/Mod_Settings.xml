@@ -25,4 +25,6 @@
   <ReGe.Reset.label>Remise à zéro</ReGe.Reset.label>
   <ReGe.Version.label>Version de mod installée : {0}</ReGe.Version.label>
   <ReGe.RotateOutput.label>Rotation de la sortie</ReGe.RotateOutput.label>
+  <ReGe.DefaultLimit.label>Limite par défaut : {0}</ReGe.DefaultLimit.label>
+  <ReGe.DefaultLimit.tooltip>Lors de la construction de nouveaux générateurs, cette valeur sera fixée comme limite. 0 signifie que la limite est illimitée.</ReGe.DefaultLimit.tooltip>
 </LanguageData>

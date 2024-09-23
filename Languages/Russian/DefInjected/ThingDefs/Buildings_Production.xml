@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
   <ResourceGenerator.label>Генератор ресурсов</ResourceGenerator.label>
   <ResourceGenerator.description>Медленно производит выбранный ресурс каждые два дня.</ResourceGenerator.description>

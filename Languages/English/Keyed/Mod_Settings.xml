@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
   <ReGe.change.confirm>Selecting a new product will remove all current progress. Continue?</ReGe.change.confirm>
   <ReGe.norecipes>No available recipes</ReGe.norecipes>
@@ -23,5 +23,7 @@
   <ReGe.ShowConfirmation.label>Show confirmation when changing products</ReGe.ShowConfirmation.label>
   <ReGe.Reset.label>Reset</ReGe.Reset.label>
   <ReGe.RotateOutput.label>Rotate output</ReGe.RotateOutput.label>
+  <ReGe.DefaultLimit.label>Default limit: {0}</ReGe.DefaultLimit.label>
+  <ReGe.DefaultLimit.tooltip>When building new generators, this value will be set as the limit. 0 will set unlimited</ReGe.DefaultLimit.tooltip>
   <ReGe.Version.label>Installed mod-version: {0}</ReGe.Version.label>
 </LanguageData>

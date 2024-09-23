@@ -167,17 +167,20 @@ public class ResourceGenerator : Building
         Scribe_Defs.Look(ref currentProduct, "currentProduct");
         Scribe_Values.Look(ref currentAmount, "currentAmount");
         Scribe_Values.Look(ref outputTile, "outputTile");
-        Scribe_Values.Look(ref limit, "limit");
+        Scribe_Values.Look(ref limit, "limit", ResourceGeneratorMod.instance.Settings.DefaultLimit);
     }
 
     public override void SpawnSetup(Map map, bool respawningAfterLoad)
     {
         base.SpawnSetup(map, respawningAfterLoad);
         setProduct(CurrentProduct, false);
-        if (!respawningAfterLoad)
+        if (respawningAfterLoad)
         {
-            NextOutputTile();
+            return;
         }
+
+        NextOutputTile();
+        limit = ResourceGeneratorMod.instance.Settings.DefaultLimit;
     }
 
     protected override void DrawAt(Vector3 drawLoc, bool flip = false)

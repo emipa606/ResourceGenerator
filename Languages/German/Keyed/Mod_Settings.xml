@@ -25,4 +25,6 @@
   <ReGe.Reset.label>Zurücksetzen</ReGe.Reset.label>
   <ReGe.Version.label>Installierte Mod-Version: {0}</ReGe.Version.label>
   <ReGe.RotateOutput.label>Ausgang rotieren</ReGe.RotateOutput.label>
+  <ReGe.DefaultLimit.label>Standardgrenzwert: {0}</ReGe.DefaultLimit.label>
+  <ReGe.DefaultLimit.tooltip>Beim Bau neuer Generatoren wird dieser Wert als Grenzwert festgelegt. 0 wird unbegrenzt gesetzt</ReGe.DefaultLimit.tooltip>
 </LanguageData>

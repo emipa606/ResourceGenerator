@@ -83,6 +83,11 @@ internal class ResourceGeneratorMod : Mod
 
         listing_Standard.CheckboxLabeled("ReGe.ShowNotification.label".Translate(), ref Settings.ShowNotification);
         listing_Standard.CheckboxLabeled("ReGe.ShowConfirmation.label".Translate(), ref Settings.ShowConfirmation);
+        Settings.DefaultLimit = (int)listing_Standard.SliderLabeled(
+            "ReGe.DefaultLimit.label".Translate(Settings.DefaultLimit == 0
+                ? "ReGe.unlimited".Translate()
+                : Settings.DefaultLimit), Settings.DefaultLimit, 0, 1000f,
+            tooltip: "ReGe.DefaultLimit.tooltip".Translate());
 
         if (currentVersion != null)
         {
