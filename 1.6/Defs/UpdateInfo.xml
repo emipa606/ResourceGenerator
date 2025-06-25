@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <TabulaRasa.UpdateDef Abstract="true" Name="ResourceGenerator_UpdateInfoBase" MayRequire="neronix17.toolbox">
+    <linkUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2747511650</linkUrl>
+    <banner>UpdateInfo/ResourceGenerator</banner>
+  </TabulaRasa.UpdateDef>
+  <TabulaRasa.UpdateDef ParentName="ResourceGenerator_UpdateInfoBase" MayRequire="neronix17.toolbox">
+    <defName>ResourceGenerator_1_4_7</defName>
+    <date>2023/7/14</date>
+    <content>The generators now has a defined output-tile.
+If the defined tile cannot be spawned in the resource will be spawned in any other possible tile.</content>
+  </TabulaRasa.UpdateDef>
+</Defs>

@@ -14,21 +14,21 @@ public class Main
 
     static Main()
     {
-        if (ResourceGeneratorMod.instance.Settings.GenerationValue == 0)
+        if (ResourceGeneratorMod.Instance.Settings.GenerationValue == 0)
         {
-            ResourceGeneratorMod.instance.Settings.GenerationValue =
+            ResourceGeneratorMod.Instance.Settings.GenerationValue =
                 ThingDefOf.Steel.GetStatValueAbstract(StatDefOf.MarketValue) * 75;
         }
 
-        if (ResourceGeneratorMod.instance.Settings.GenerationTime == default)
+        if (ResourceGeneratorMod.Instance.Settings.GenerationTime == default)
         {
-            ResourceGeneratorMod.instance.Settings.GenerationTime = new IntRange(120000, 120000);
+            ResourceGeneratorMod.Instance.Settings.GenerationTime = new IntRange(120000, 120000);
         }
 
-        ResourceGeneratorMod.steelWorth = ThingDefOf.Steel.GetStatValueAbstract(StatDefOf.MarketValue);
-        ResourceGeneratorMod.componentWorth =
+        ResourceGeneratorMod.SteelWorth = ThingDefOf.Steel.GetStatValueAbstract(StatDefOf.MarketValue);
+        ResourceGeneratorMod.ComponentWorth =
             ThingDefOf.ComponentIndustrial.GetStatValueAbstract(StatDefOf.MarketValue);
-        ResourceGeneratorMod.woodWorth = ThingDefOf.WoodLog.GetStatValueAbstract(StatDefOf.MarketValue);
+        ResourceGeneratorMod.WoodWorth = ThingDefOf.WoodLog.GetStatValueAbstract(StatDefOf.MarketValue);
 
         ValidResources = [];
         ValidResources.AddRange(DefDatabase<ThingDef>.AllDefsListForReading

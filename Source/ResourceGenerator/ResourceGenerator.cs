@@ -9,8 +9,8 @@ namespace ResourceGenerator;
 
 public class ResourceGenerator : Building
 {
-    private static readonly Vector3 iconSize = new Vector3(0.5f, 1f, 0.5f);
-    private static readonly Vector3 iconOffset = new Vector3(0.3f, 1.1f, 0.3f);
+    private static readonly Vector3 iconSize = new(0.5f, 1f, 0.5f);
+    private static readonly Vector3 iconOffset = new(0.3f, 1.1f, 0.3f);
     private int currentAmount;
     private Color currentColor;
     private Texture2D currentIcon;
@@ -23,73 +23,55 @@ public class ResourceGenerator : Building
     private CompResourceSpawner spawner;
     private List<IntVec3> validCells;
 
-    public CompFlickable FlickableComp
+    private CompFlickable FlickableComp
     {
         get
         {
-            if (flickableComp == null)
-            {
-                flickableComp = GetComp<CompFlickable>();
-            }
+            flickableComp ??= GetComp<CompFlickable>();
 
             return flickableComp;
         }
-        set => flickableComp = value;
     }
 
     public List<IntVec3> ValidCells
     {
         get
         {
-            if (validCells == null)
-            {
-                validCells = GenAdj.CellsAdjacent8Way(this).ToList();
-            }
+            validCells ??= GenAdj.CellsAdjacent8Way(this).ToList();
 
             return validCells;
         }
     }
 
-    public CompPowerTrader PowerTraderComp
+    private CompPowerTrader PowerTraderComp
     {
         get
         {
-            if (powerTraderComp == null)
-            {
-                powerTraderComp = GetComp<CompPowerTrader>();
-            }
+            powerTraderComp ??= GetComp<CompPowerTrader>();
 
             return powerTraderComp;
         }
-        set => powerTraderComp = value;
     }
 
-    public CompResourceSpawner Spawner
+    private CompResourceSpawner Spawner
     {
         get
         {
-            if (spawner == null)
-            {
-                spawner = GetComp<CompResourceSpawner>();
-            }
+            spawner ??= GetComp<CompResourceSpawner>();
 
             return spawner;
         }
-        set => spawner = value;
     }
 
     public ThingDef CurrentProduct
     {
         get
         {
-            if (currentProduct == null)
-            {
-                currentProduct = ThingDefOf.Steel;
-            }
+            currentProduct ??= ThingDefOf.Steel;
 
             return currentProduct;
         }
-        set
+        private set
         {
             currentProduct = value;
             CurrentIcon = null;
@@ -109,7 +91,7 @@ public class ResourceGenerator : Building
             currentAmount = amountToSpawn(CurrentProduct, Spawner.PropsSpawner.generationFactor);
             return currentAmount;
         }
-        set => currentAmount = value;
+        private set => currentAmount = value;
     }
 
     public IntVec3 OutputTile
@@ -123,10 +105,10 @@ public class ResourceGenerator : Building
 
             return outputTile;
         }
-        set => outputTile = value;
+        private set => outputTile = value;
     }
 
-    public Texture2D CurrentIcon
+    private Texture2D CurrentIcon
     {
         get
         {
@@ -141,7 +123,7 @@ public class ResourceGenerator : Building
         set => currentIcon = value;
     }
 
-    public Color CurrentColor
+    private Color CurrentColor
     {
         get
         {
@@ -157,9 +139,9 @@ public class ResourceGenerator : Building
     }
 
 
-    private bool ControlIsHeld => Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
+    private static bool ControlIsHeld => Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
 
-    private bool ShiftIsHeld => Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+    private static bool ShiftIsHeld => Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 
     public override void ExposeData()
     {
@@ -167,7 +149,7 @@ public class ResourceGenerator : Building
         Scribe_Defs.Look(ref currentProduct, "currentProduct");
         Scribe_Values.Look(ref currentAmount, "currentAmount");
         Scribe_Values.Look(ref outputTile, "outputTile");
-        Scribe_Values.Look(ref limit, "limit", ResourceGeneratorMod.instance.Settings.DefaultLimit);
+        Scribe_Values.Look(ref limit, "limit", ResourceGeneratorMod.Instance.Settings.DefaultLimit);
     }
 
     public override void SpawnSetup(Map map, bool respawningAfterLoad)
@@ -180,7 +162,7 @@ public class ResourceGenerator : Building
         }
 
         NextOutputTile();
-        limit = ResourceGeneratorMod.instance.Settings.DefaultLimit;
+        limit = ResourceGeneratorMod.Instance.Settings.DefaultLimit;
     }
 
     protected override void DrawAt(Vector3 drawLoc, bool flip = false)
@@ -258,17 +240,17 @@ public class ResourceGenerator : Building
 
                         if (ControlIsHeld)
                         {
-                            resourceGenerator.DecreaseBy(1);
+                            resourceGenerator.decreaseBy(1);
                             continue;
                         }
 
                         if (ShiftIsHeld)
                         {
-                            resourceGenerator.DecreaseBy(100);
+                            resourceGenerator.decreaseBy(100);
                             continue;
                         }
 
-                        resourceGenerator.DecreaseBy(10);
+                        resourceGenerator.decreaseBy(10);
                     }
                 },
                 defaultDesc = "ReGe.decreaseLimittt".Translate(),
@@ -290,17 +272,17 @@ public class ResourceGenerator : Building
 
                     if (ControlIsHeld)
                     {
-                        resourceGenerator.IncreaseBy(1);
+                        resourceGenerator.increaseBy(1);
                         continue;
                     }
 
                     if (ShiftIsHeld)
                     {
-                        resourceGenerator.IncreaseBy(100);
+                        resourceGenerator.increaseBy(100);
                         continue;
                     }
 
-                    resourceGenerator.IncreaseBy(10);
+                    resourceGenerator.increaseBy(10);
                 }
             },
             defaultDesc = "ReGe.increaseLimittt".Translate(),
@@ -309,19 +291,19 @@ public class ResourceGenerator : Building
         };
     }
 
-    public void IncreaseBy(int amount)
+    private void increaseBy(int amount)
     {
         limit += amount;
         verifyLimit();
     }
 
-    public void DecreaseBy(int amount)
+    private void decreaseBy(int amount)
     {
         limit = Math.Max(0, limit - amount);
         verifyLimit(limit == 0);
     }
 
-    public override void Tick()
+    protected override void Tick()
     {
         base.Tick();
         if (GenTicks.TicksGame % GenTicks.TickRareInterval != 0)
@@ -487,7 +469,7 @@ public class ResourceGenerator : Building
                 }
 
                 var textToAdd = $"{thingDef.LabelCap} x{amount}";
-                if (ResourceGeneratorMod.instance.Settings.ShowConfirmation)
+                if (ResourceGeneratorMod.Instance.Settings.ShowConfirmation)
                 {
                     list.Add(new FloatMenuOption(textToAdd, delegate
                         {
@@ -520,9 +502,9 @@ public class ResourceGenerator : Building
 
     private static int amountToSpawn(ThingDef thingDef, float factor)
     {
-        var itemWorh = thingDef.GetStatValueAbstract(StatDefOf.MarketValue);
-        var valueToGenerate = ResourceGeneratorMod.instance.Settings.GenerationValue * factor;
-        return (int)Math.Floor(valueToGenerate / itemWorh);
+        var itemWorth = thingDef.GetStatValueAbstract(StatDefOf.MarketValue);
+        var valueToGenerate = ResourceGeneratorMod.Instance.Settings.GenerationValue * factor;
+        return (int)Math.Floor(valueToGenerate / itemWorth);
     }
 
     private static Texture2D getIcon(ThingDef thingDef)

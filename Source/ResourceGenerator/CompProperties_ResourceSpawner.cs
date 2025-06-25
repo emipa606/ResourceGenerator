@@ -16,7 +16,7 @@ public class CompProperties_ResourceSpawner : CompProperties
 
     public bool spawnForbidden;
 
-    public IntRange spawnIntervalRange = new IntRange(100, 100);
+    public IntRange spawnIntervalRange = new(100, 100);
 
     public int spawnMaxAdjacent = -1;
 

@@ -12,11 +12,11 @@ internal class ResourceGeneratorMod : Mod
     /// <summary>
     ///     The instance of the settings to be read by the mod
     /// </summary>
-    public static ResourceGeneratorMod instance;
+    public static ResourceGeneratorMod Instance;
 
-    public static float steelWorth;
-    public static float componentWorth;
-    public static float woodWorth;
+    public static float SteelWorth;
+    public static float ComponentWorth;
+    public static float WoodWorth;
     private static string currentVersion;
 
     /// <summary>
@@ -30,7 +30,7 @@ internal class ResourceGeneratorMod : Mod
     /// <param name="content"></param>
     public ResourceGeneratorMod(ModContentPack content) : base(content)
     {
-        instance = this;
+        Instance = this;
         currentVersion = VersionFromManifest.GetVersionFromModMetaData(content.ModMetaData);
         Settings = GetSettings<ResourceGeneratorSettings>();
     }
@@ -52,38 +52,38 @@ internal class ResourceGeneratorMod : Mod
     /// <param name="rect"></param>
     public override void DoSettingsWindowContents(Rect rect)
     {
-        var listing_Standard = new Listing_Standard();
-        listing_Standard.Begin(rect);
-        listing_Standard.Gap();
-        listing_Standard.Label(
+        var listingStandard = new Listing_Standard();
+        listingStandard.Begin(rect);
+        listingStandard.Gap();
+        listingStandard.Label(
             "ReGe.GenerationTime.label".Translate(Settings.GenerationTime.min.ToStringTicksToPeriod(),
                 Settings.GenerationTime.max.ToStringTicksToPeriod()), -1f,
             "ReGe.GenerationTime.tooltip".Translate());
-        listing_Standard.IntRange(ref Settings.GenerationTime, 1, 7 * GenDate.TicksPerDay);
-        listing_Standard.Label("ReGe.GenerationValue.label".Translate(), -1,
+        listingStandard.IntRange(ref Settings.GenerationTime, 1, 7 * GenDate.TicksPerDay);
+        listingStandard.Label("ReGe.GenerationValue.label".Translate(), -1,
             "ReGe.GenerationValue.tooltip".Translate());
-        Settings.GenerationValue = Widgets.HorizontalSlider(listing_Standard.GetRect(20),
+        Settings.GenerationValue = Widgets.HorizontalSlider(listingStandard.GetRect(20),
             Settings.GenerationValue, 0,
             2500f,
             false, Settings.GenerationValue.ToStringMoney(), null, null, 1);
-        listing_Standard.Gap();
-        listing_Standard.Label("ReGe.ExampleTitle.label".Translate());
-        listing_Standard.Label(
-            "ReGe.ExampleSteel.label".Translate((int)Math.Round(instance.Settings.GenerationValue / steelWorth)));
-        listing_Standard.Label(
+        listingStandard.Gap();
+        listingStandard.Label("ReGe.ExampleTitle.label".Translate());
+        listingStandard.Label(
+            "ReGe.ExampleSteel.label".Translate((int)Math.Round(Instance.Settings.GenerationValue / SteelWorth)));
+        listingStandard.Label(
             "ReGe.ExampleComponent.label".Translate(
-                (int)Math.Round(instance.Settings.GenerationValue / componentWorth)));
-        listing_Standard.Label(
-            "ReGe.ExampleWood.label".Translate((int)Math.Round(instance.Settings.GenerationValue / woodWorth)));
-        if (listing_Standard.ButtonText("ReGe.Reset.label".Translate()))
+                (int)Math.Round(Instance.Settings.GenerationValue / ComponentWorth)));
+        listingStandard.Label(
+            "ReGe.ExampleWood.label".Translate((int)Math.Round(Instance.Settings.GenerationValue / WoodWorth)));
+        if (listingStandard.ButtonText("ReGe.Reset.label".Translate()))
         {
             Settings.GenerationTime = new IntRange(120000, 120000);
-            Settings.GenerationValue = steelWorth * 75;
+            Settings.GenerationValue = SteelWorth * 75;
         }
 
-        listing_Standard.CheckboxLabeled("ReGe.ShowNotification.label".Translate(), ref Settings.ShowNotification);
-        listing_Standard.CheckboxLabeled("ReGe.ShowConfirmation.label".Translate(), ref Settings.ShowConfirmation);
-        Settings.DefaultLimit = (int)listing_Standard.SliderLabeled(
+        listingStandard.CheckboxLabeled("ReGe.ShowNotification.label".Translate(), ref Settings.ShowNotification);
+        listingStandard.CheckboxLabeled("ReGe.ShowConfirmation.label".Translate(), ref Settings.ShowConfirmation);
+        Settings.DefaultLimit = (int)listingStandard.SliderLabeled(
             "ReGe.DefaultLimit.label".Translate(Settings.DefaultLimit == 0
                 ? "ReGe.unlimited".Translate()
                 : Settings.DefaultLimit), Settings.DefaultLimit, 0, 1000f,
@@ -91,12 +91,12 @@ internal class ResourceGeneratorMod : Mod
 
         if (currentVersion != null)
         {
-            listing_Standard.Gap();
+            listingStandard.Gap();
             GUI.contentColor = Color.gray;
-            listing_Standard.Label("ReGe.Version.label".Translate(currentVersion));
+            listingStandard.Label("ReGe.Version.label".Translate(currentVersion));
             GUI.contentColor = Color.white;
         }
 
-        listing_Standard.End();
+        listingStandard.End();
     }
 }

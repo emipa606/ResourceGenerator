@@ -24,21 +24,21 @@ public class CompResourceSpawner : ThingComp
     {
         if (!respawningAfterLoad)
         {
-            ResetCountdown();
+            resetCountdown();
         }
     }
 
     public override void CompTick()
     {
-        TickInterval(1);
+        tickInterval(1);
     }
 
     public override void CompTickRare()
     {
-        TickInterval(250);
+        tickInterval(250);
     }
 
-    private void TickInterval(int interval)
+    private void tickInterval(int interval)
     {
         if (!parent.Spawned)
         {
@@ -64,21 +64,21 @@ public class CompResourceSpawner : ThingComp
         }
 
         ticksUntilSpawn -= interval;
-        CheckShouldSpawn();
+        checkShouldSpawn();
     }
 
-    private void CheckShouldSpawn()
+    private void checkShouldSpawn()
     {
         if (ticksUntilSpawn > 0)
         {
             return;
         }
 
-        ResetCountdown();
-        TryDoSpawn();
+        resetCountdown();
+        tryDoSpawn();
     }
 
-    public void TryDoSpawn()
+    private void tryDoSpawn()
     {
         if (!parent.Spawned)
         {
@@ -96,7 +96,7 @@ public class CompResourceSpawner : ThingComp
                 amountToSpawn = product.stackLimit;
             }
 
-            if (!TryFindSpawnCell(product, amountToSpawn, out var outputTile))
+            if (!tryFindSpawnCell(product, amountToSpawn, out var outputTile))
             {
                 return;
             }
@@ -118,7 +118,7 @@ public class CompResourceSpawner : ThingComp
             amount -= amountToSpawn;
         }
 
-        if (ResourceGeneratorMod.instance.Settings.ShowNotification && PropsSpawner.showMessageIfOwned &&
+        if (ResourceGeneratorMod.Instance.Settings.ShowNotification && PropsSpawner.showMessageIfOwned &&
             parent.Faction == Faction.OfPlayer)
         {
             Messages.Message("MessageCompSpawnerSpawnedItem".Translate(product.LabelCap), parent,
@@ -126,7 +126,7 @@ public class CompResourceSpawner : ThingComp
         }
     }
 
-    public bool TryFindSpawnCell(ThingDef thingToSpawn, int spawnCount, out IntVec3 result)
+    private bool tryFindSpawnCell(ThingDef thingToSpawn, int spawnCount, out IntVec3 result)
     {
         result = IntVec3.Invalid;
         if (((ResourceGenerator)parent).IsValidSpawnCell(((ResourceGenerator)parent).OutputTile, thingToSpawn,
@@ -151,9 +151,9 @@ public class CompResourceSpawner : ThingComp
         return false;
     }
 
-    private void ResetCountdown()
+    private void resetCountdown()
     {
-        ticksUntilSpawn = ResourceGeneratorMod.instance.Settings.GenerationTime.RandomInRange;
+        ticksUntilSpawn = ResourceGeneratorMod.Instance.Settings.GenerationTime.RandomInRange;
     }
 
     public override void PostExposeData()
@@ -192,8 +192,8 @@ public class CompResourceSpawner : ThingComp
                 icon = TexCommand.DesirePower,
                 action = delegate
                 {
-                    ResetCountdown();
-                    TryDoSpawn();
+                    resetCountdown();
+                    tryDoSpawn();
                 }
             };
         }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: resource generator -->
+  <BasicResourceGenerator.label>resource generator</BasicResourceGenerator.label>
+  <!-- EN: Makes it possible to build generators that can create products as long as they have power. -->
+  <BasicResourceGenerator.description>Makes it possible to build generators that can create products as long as they have power.</BasicResourceGenerator.description>
+  <!-- EN: improved resource generator -->
+  <ImprovedResourceGenerator.label>improved resource generator</ImprovedResourceGenerator.label>
+  <!-- EN: Enables improved resource generators, capable of generating 2,5 times the amount of resources in the same time. -->
+  <ImprovedResourceGenerator.description>Enables improved resource generators, capable of generating 2,5 times the amount of resources in the same time.</ImprovedResourceGenerator.description>
+</LanguageData>

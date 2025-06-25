@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: improved resource generator -->
+  <ImprovedResourceGenerator.label>improved resource generator</ImprovedResourceGenerator.label>
+  <!-- EN: Slowly generates items every two days. Spawns 2,5 the amount as the normal generator -->
+  <ImprovedResourceGenerator.description>Slowly generates items every two days. Spawns 2,5 the amount as the normal generator</ImprovedResourceGenerator.description>
+  <!-- EN: resource generator -->
+  <ResourceGenerator.label>resource generator</ResourceGenerator.label>
+  <!-- EN: Slowly generates items every two days. -->
+  <ResourceGenerator.description>Slowly generates items every two days.</ResourceGenerator.description>
+</LanguageData>
