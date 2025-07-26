@@ -100,12 +100,17 @@ public class ResourceGenerator : Building
         {
             if (outputTile == IntVec3.Invalid)
             {
-                outputTile = ValidCells.RandomElement();
+                outputTile = ValidCells.RandomElement() - Position;
             }
 
-            return outputTile;
+            if (ValidCells.Contains(outputTile))
+            {
+                outputTile -= Position;
+            }
+
+            return outputTile + Position;
         }
-        private set => outputTile = value;
+        private set => outputTile = value - Position;
     }
 
     private Texture2D CurrentIcon
@@ -138,10 +143,21 @@ public class ResourceGenerator : Building
         set => currentColor = value;
     }
 
-
     private static bool ControlIsHeld => Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
 
     private static bool ShiftIsHeld => Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+
+    public override void PreSwapMap()
+    {
+        base.PreSwapMap();
+        validCells = null;
+    }
+
+    public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
+    {
+        base.DeSpawn(mode);
+        validCells = null;
+    }
 
     public override void ExposeData()
     {

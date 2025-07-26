@@ -5,6 +5,12 @@
   "PreviewVersion": "1.6",
   "SocialImageSet": true,
   "FundingSet": true,
-  "LastXmlCleaning": "2025-06-25T20:34:43.6920329+02:00",
-  "SearchTags": " power-driven"
+  "LastXmlCleaning": "2025-07-26T14:48:51.8306275+02:00",
+  "SearchTags": " power-driven",
+  "Patches": false,
+  "Defs": true,
+  "Assemblies": true,
+  "LinesOfCode": 30030,
+  "LinesOfXML": 6768,
+  "CodeBaseSize": 72
 }
