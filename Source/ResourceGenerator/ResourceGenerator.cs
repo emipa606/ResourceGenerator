@@ -12,24 +12,19 @@ public class ResourceGenerator : Building
     private static readonly Vector3 iconSize = new(0.5f, 1f, 0.5f);
     private static readonly Vector3 iconOffset = new(0.3f, 1.1f, 0.3f);
     private int currentAmount;
-    private Color currentColor;
-    private Texture2D currentIcon;
     private ThingDef currentProduct;
-    private CompFlickable flickableComp;
     private int lastCount;
     private int limit;
     private IntVec3 outputTile;
-    private CompPowerTrader powerTraderComp;
-    private CompResourceSpawner spawner;
     private List<IntVec3> validCells;
 
     private CompFlickable FlickableComp
     {
         get
         {
-            flickableComp ??= GetComp<CompFlickable>();
+            field ??= GetComp<CompFlickable>();
 
-            return flickableComp;
+            return field;
         }
     }
 
@@ -47,9 +42,9 @@ public class ResourceGenerator : Building
     {
         get
         {
-            powerTraderComp ??= GetComp<CompPowerTrader>();
+            field ??= GetComp<CompPowerTrader>();
 
-            return powerTraderComp;
+            return field;
         }
     }
 
@@ -57,9 +52,9 @@ public class ResourceGenerator : Building
     {
         get
         {
-            spawner ??= GetComp<CompResourceSpawner>();
+            field ??= GetComp<CompResourceSpawner>();
 
-            return spawner;
+            return field;
         }
     }
 
@@ -117,30 +112,30 @@ public class ResourceGenerator : Building
     {
         get
         {
-            if (currentIcon != null)
+            if (field != null)
             {
-                return currentIcon;
+                return field;
             }
 
-            currentIcon = getIcon(CurrentProduct);
-            return currentIcon;
+            field = getIcon(CurrentProduct);
+            return field;
         }
-        set => currentIcon = value;
+        set;
     }
 
     private Color CurrentColor
     {
         get
         {
-            if (currentColor != default)
+            if (field != default)
             {
-                return currentColor;
+                return field;
             }
 
-            currentColor = getColor(CurrentProduct);
-            return currentColor;
+            field = getColor(CurrentProduct);
+            return field;
         }
-        set => currentColor = value;
+        set;
     }
 
     private static bool ControlIsHeld => Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
@@ -172,7 +167,7 @@ public class ResourceGenerator : Building
     {
         base.SpawnSetup(map, respawningAfterLoad);
         setProduct(CurrentProduct, false);
-        if (respawningAfterLoad)
+        if (respawningAfterLoad || Spawner.Pause)
         {
             return;
         }

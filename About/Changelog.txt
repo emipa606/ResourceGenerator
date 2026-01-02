@@ -1,5 +1,8 @@
 # Changelog for ResourceGenerator
 
+1.6.2 - Generators should now rememeber the limit when traveling with gravships
+
+
 1.6.1 - Should work better on space-travel
 
 

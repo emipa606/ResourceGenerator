@@ -6,6 +6,7 @@ namespace ResourceGenerator;
 
 public class CompResourceSpawner : ThingComp
 {
+    public bool Pause;
     private int ticksUntilSpawn;
 
     public CompProperties_ResourceSpawner PropsSpawner => (CompProperties_ResourceSpawner)props;
@@ -18,6 +19,18 @@ public class CompResourceSpawner : ThingComp
             var comp = parent.GetComp<CompPowerTrader>();
             return comp is { PowerOn: true };
         }
+    }
+
+    public override void PreSwapMap()
+    {
+        base.PreSwapMap();
+        Pause = true;
+    }
+
+    public override void PostSwapMap()
+    {
+        base.PostSwapMap();
+        Pause = false;
     }
 
     public override void PostSpawnSetup(bool respawningAfterLoad)
