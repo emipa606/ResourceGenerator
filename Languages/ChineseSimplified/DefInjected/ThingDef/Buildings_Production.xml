@@ -9,4 +9,8 @@
   <ResourceGenerator.label>资源生成器</ResourceGenerator.label>
   <!-- EN: Slowly generates items every two days. -->
   <ResourceGenerator.description>每两天缓慢生成一次物品。</ResourceGenerator.description>
+  <!-- EN: fueled resource generator -->
+  <FueledResourceGenerator.label>燃料资源生成器</FueledResourceGenerator.label>
+  <!-- EN: Slowly generates items every two days. Uses chemfuel instead of electricity and is a bit less effective. -->
+  <FueledResourceGenerator.description>每两天缓慢生成物品。使用化学燃料而非电力，效果稍差。</FueledResourceGenerator.description>
 </LanguageData>

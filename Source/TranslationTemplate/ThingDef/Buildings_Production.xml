@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
+  <!-- EN: fueled resource generator -->
+  <FueledResourceGenerator.label>fueled resource generator</FueledResourceGenerator.label>
+  <!-- EN: Slowly generates items every two days. Uses chemfuel instead of electricity and is a bit less effective. -->
+  <FueledResourceGenerator.description>Slowly generates items every two days. Uses chemfuel instead of electricity and is a bit less effective.</FueledResourceGenerator.description>
   <!-- EN: improved resource generator -->
   <ImprovedResourceGenerator.label>improved resource generator</ImprovedResourceGenerator.label>
   <!-- EN: Slowly generates items every two days. Spawns 2,5 the amount as the normal generator -->

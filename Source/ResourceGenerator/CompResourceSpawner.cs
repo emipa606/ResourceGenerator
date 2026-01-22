@@ -16,8 +16,12 @@ public class CompResourceSpawner : ThingComp
     {
         get
         {
-            var comp = parent.GetComp<CompPowerTrader>();
-            return comp is { PowerOn: true };
+            if (parent.def.defName == "FueledResourceGenerator")
+            {
+                return parent.GetComp<CompRefuelable>() is { HasFuel: true };
+            }
+
+            return parent.GetComp<CompPowerTrader>() is { PowerOn: true };
         }
     }
 
@@ -72,6 +76,11 @@ public class CompResourceSpawner : ThingComp
         }
 
         if (PropsSpawner.requiresPower && !PowerOn)
+        {
+            return;
+        }
+
+        if (parent.def.defName != "FueledResourceGenerator" && !parent.GetComp<CompFlickable>().SwitchIsOn)
         {
             return;
         }

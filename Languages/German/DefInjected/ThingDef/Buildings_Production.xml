@@ -9,4 +9,8 @@
   <ResourceGenerator.label>Ressourcen-Generator</ResourceGenerator.label>
   <!-- EN: Slowly generates items every two days. -->
   <ResourceGenerator.description>Erzeugt langsam alle zwei Tage Gegenstände.</ResourceGenerator.description>
+  <!-- EN: fueled resource generator -->
+  <FueledResourceGenerator.label>getankter Ressourcen-Generator</FueledResourceGenerator.label>
+  <!-- EN: Slowly generates items every two days. Uses chemfuel instead of electricity and is a bit less effective. -->
+  <FueledResourceGenerator.description>Erzeugt langsam alle zwei Tage Gegenstände. Verwendet Chemietreibstoff anstelle von Elektrizität und ist ein bisschen weniger effektiv.</FueledResourceGenerator.description>
 </LanguageData>

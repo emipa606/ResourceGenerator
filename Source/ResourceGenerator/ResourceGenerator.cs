@@ -48,6 +48,21 @@ public class ResourceGenerator : Building
         }
     }
 
+
+    private CompRefuelable RefuelableComp
+    {
+        get
+        {
+            field ??= GetComp<CompRefuelable>();
+
+            return field;
+        }
+    }
+
+    private bool PowerOn => def.defName == "FueledResourceGenerator" ? RefuelableComp.HasFuel : PowerTraderComp.PowerOn;
+
+    private bool FlickedOn => def.defName == "FueledResourceGenerator" || FlickableComp.SwitchIsOn;
+
     private CompResourceSpawner Spawner
     {
         get
@@ -182,7 +197,7 @@ public class ResourceGenerator : Building
         var iconLocation = drawLoc + iconOffset;
         var color = Color.white;
         var icon = Main.NoPower;
-        if (GetComp<CompPowerTrader>().PowerOn)
+        if (PowerOn)
         {
             color = CurrentColor;
             icon = CurrentIcon;
@@ -204,6 +219,11 @@ public class ResourceGenerator : Building
     public override string GetInspectString()
     {
         var baseInspectString = base.GetInspectString();
+
+        if (def.defName == "FueledResourceGenerator")
+        {
+            return baseInspectString;
+        }
 
         if (limit == 0)
         {
@@ -236,6 +256,11 @@ public class ResourceGenerator : Building
             defaultIconColor = CurrentColor,
             defaultLabel = CurrentProduct.LabelCap
         };
+        if (def.defName == "FueledResourceGenerator")
+        {
+            yield break;
+        }
+
         if (limit > 0)
         {
             yield return new Command_Action
@@ -317,12 +342,17 @@ public class ResourceGenerator : Building
     protected override void Tick()
     {
         base.Tick();
-        if (GenTicks.TicksGame % GenTicks.TickRareInterval != 0)
+        if (!this.IsHashIntervalTick(GenTicks.TickRareInterval))
         {
             return;
         }
 
-        if (PowerTraderComp.PowerOn)
+        if (!FlickedOn)
+        {
+            return;
+        }
+
+        if (PowerOn)
         {
             FleckMaker.ThrowSmoke(DrawPos, Map, 1f);
         }
@@ -392,14 +422,14 @@ public class ResourceGenerator : Building
 
     private bool verifyLimit(bool reset = false)
     {
-        if (CurrentProduct == null)
+        if (CurrentProduct == null || def.defName == "FueledResourceGenerator")
         {
             return false;
         }
 
         if (limit == 0)
         {
-            if (reset && !FlickableComp.SwitchIsOn)
+            if (reset && !FlickedOn)
             {
                 FlickableComp.DoFlick();
             }
@@ -410,7 +440,7 @@ public class ResourceGenerator : Building
         lastCount = Map.resourceCounter.GetCount(CurrentProduct);
         if (lastCount < limit)
         {
-            if (!FlickableComp.SwitchIsOn)
+            if (!FlickedOn)
             {
                 FlickableComp.DoFlick();
             }
@@ -418,7 +448,7 @@ public class ResourceGenerator : Building
             return true;
         }
 
-        if (FlickableComp.SwitchIsOn)
+        if (FlickedOn)
         {
             FlickableComp.DoFlick();
         }

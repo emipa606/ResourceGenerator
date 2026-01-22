@@ -1,5 +1,8 @@
 # Changelog for ResourceGenerator
 
+1.6.3 - Added a chemfueled resource generator
+
+
 1.6.2 - Generators should now rememeber the limit when traveling with gravships
 
 
