@@ -22,6 +22,9 @@ Generators spawns items with a value equivalent of 75x Steel every two days as l
 Generators can also be set to turn off when there are enough of the resource on the map.
 Possible items to generate includes all stackable items that are either minable or is a stuff-type (Metal, Stone, Textile), vanilla and modded resources. 
 
+There is also a more advanced generator and also a fueled generator.
+The fueled generator is a bit less effective and cannot use the resource limiter.
+
 - [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3144637263]Chinese translation[/url] by asavikle, updated by CNCG779
 - Russian translation by AveAcVale
 
@@ -53,5 +56,5 @@ Since modding is just a hobby for me I expect no donations to keep modding. If y
 [/list] 
 
 [url=https://steamcommunity.com/sharedfiles/filedetails/changelog/2747511650][img]https://img.shields.io/github/v/release/emipa606/ResourceGenerator?label=latest%20version&amp;style=plastic&amp;labelColor=0070cd&amp;color=white[/img][/url] | tags: power-driven</description>
-  <modVersion IgnoreIfNoMatchingField="True">1.6.3</modVersion>
+  <modVersion IgnoreIfNoMatchingField="True">1.6.4</modVersion>
 </ModMetaData>

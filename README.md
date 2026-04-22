@@ -11,6 +11,9 @@ Generators spawns items with a value equivalent of 75x Steel every two days as l
 Generators can also be set to turn off when there are enough of the resource on the map.
 Possible items to generate includes all stackable items that are either minable or is a stuff-type (Metal, Stone, Textile), vanilla and modded resources. 
 
+There is also a more advanced generator and also a fueled generator.
+The fueled generator is a bit less effective and cannot use the resource limiter.
+
 - [Chinese translation](https://steamcommunity.com/sharedfiles/filedetails/?id=3144637263) by asavikle, updated by CNCG779
 - Russian translation by AveAcVale
 

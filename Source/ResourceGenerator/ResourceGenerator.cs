@@ -157,6 +157,29 @@ public class ResourceGenerator : Building
 
     private static bool ShiftIsHeld => Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 
+    private static int LimitChangeAmount
+    {
+        get
+        {
+            if (ControlIsHeld && ShiftIsHeld)
+            {
+                return 1000;
+            }
+
+            if (ControlIsHeld)
+            {
+                return 1;
+            }
+
+            if (ShiftIsHeld)
+            {
+                return 100;
+            }
+
+            return 10;
+        }
+    }
+
     public override void PreSwapMap()
     {
         base.PreSwapMap();
@@ -274,19 +297,7 @@ public class ResourceGenerator : Building
                             continue;
                         }
 
-                        if (ControlIsHeld)
-                        {
-                            resourceGenerator.decreaseBy(1);
-                            continue;
-                        }
-
-                        if (ShiftIsHeld)
-                        {
-                            resourceGenerator.decreaseBy(100);
-                            continue;
-                        }
-
-                        resourceGenerator.decreaseBy(10);
+                        resourceGenerator.decreaseBy(LimitChangeAmount);
                     }
                 },
                 defaultDesc = "ReGe.decreaseLimittt".Translate(),
@@ -306,19 +317,7 @@ public class ResourceGenerator : Building
                         continue;
                     }
 
-                    if (ControlIsHeld)
-                    {
-                        resourceGenerator.increaseBy(1);
-                        continue;
-                    }
-
-                    if (ShiftIsHeld)
-                    {
-                        resourceGenerator.increaseBy(100);
-                        continue;
-                    }
-
-                    resourceGenerator.increaseBy(10);
+                    resourceGenerator.increaseBy(LimitChangeAmount);
                 }
             },
             defaultDesc = "ReGe.increaseLimittt".Translate(),

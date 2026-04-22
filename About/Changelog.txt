@@ -1,5 +1,8 @@
 # Changelog for ResourceGenerator
 
+1.6.4 - When holding both ctrl and shift the amount is changed with 1000
+
+
 1.6.3 - Added a chemfueled resource generator
 
 
