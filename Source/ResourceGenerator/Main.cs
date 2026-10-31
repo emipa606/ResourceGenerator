@@ -7,7 +7,7 @@ using Verse;
 namespace ResourceGenerator;
 
 [StaticConstructorOnStartup]
-public class Main
+public static class Main
 {
     public static readonly HashSet<ThingDef> ValidResources;
     public static readonly Texture2D NoPower = ContentFinder<Texture2D>.Get("UI/Buttons/Abandon", false);
@@ -30,11 +30,14 @@ public class Main
             ThingDefOf.ComponentIndustrial.GetStatValueAbstract(StatDefOf.MarketValue);
         ResourceGeneratorMod.WoodWorth = ThingDefOf.WoodLog.GetStatValueAbstract(StatDefOf.MarketValue);
 
-        ValidResources = [];
-        ValidResources.AddRange(DefDatabase<ThingDef>.AllDefsListForReading
-            .Where(def => def.IsStuff));
-        ValidResources.AddRange(DefDatabase<ThingDef>.AllDefsListForReading
-            .Where(def => def.mineable).Select(def => def.building.mineableThing));
+        ValidResources =
+        [
+            .. DefDatabase<ThingDef>.AllDefsListForReading
+                .Where(def => def.IsStuff),
+
+            .. DefDatabase<ThingDef>.AllDefsListForReading
+                .Where(def => def.mineable).Select(def => def.building.mineableThing)
+        ];
         Log.Message($"[ResourceGenerator]: Added {ValidResources.Count} resources as possible to generate");
     }
 }

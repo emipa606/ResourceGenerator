@@ -1,53 +1,91 @@
-# GitHub Copilot Instructions
+# GitHub Copilot Instructions for Resource Generator Mod
 
 ## Mod Overview and Purpose
 
-**Resource Generator** is a mod for RimWorld that introduces a new type of building called the "Resource Generator." It aims to provide players with a reliable method of generating various resources over time. This mod is inspired by Atysoona's original Resource Generators mod, updating and expanding its functionality for the current game version.
+The **Resource Generator** mod is a spiritual successor to Atysoona's mod **Resource Generators**. It introduces a new building in the game, the **Resource Generator**, which can generate a variety of resources based on their market value. The generator spawns items with a value equivalent to 75x Steel every two days, provided it has power. Additionally, generators can be configured to stop generating resources when there is an adequate supply on the map. The mod supports both vanilla and modded resources that are stackable, minable, or of stuff-type (like Metal, Stone, Textile).
 
-## Key Features and Systems
+**Key Features and Systems:**
 
-- **Resource Generators:** Generate resources based on their market value, producing items equivalent to 75x the value of Steel every two days with adequate power supply.
-  
-- **Dynamic Resource Management:** Generators can be set to stop production when sufficient quantities of the resource exist on the map.
-
-- **Resource Diversity:** Capable of generating all stackable, minable, or stuff-type items, including metals, stones, textiles, and additional resources introduced by other mods.
-
-- **Advanced Generators:** Offer more efficient resource generation with enhanced capabilities.
-
-- **Fueled Generators:** A less efficient variant that operates without the resource limiter.
-
-- **Multilingual Support:** Includes translations for Chinese (by asavikle, updated by CNCG779) and Russian (by AveAcVale).
+1. **Resource Generation:** The generator produces resources at a rate determined by their market value. It spawns items with a value equivalent to 75x Steel every two days as long as it has power.
+2. **Resource Limit:** The generator can be set to stop generating resources when there is an adequate supply on the map.
+3. **Advanced and Fueled Generators:** There are two types of advanced generators, each with unique properties. The fueled generator is less effective and cannot use the resource limiter.
+4. **International Support:** The mod includes translations for Chinese and Russian languages.
 
 ## Coding Patterns and Conventions
 
-- Follow a consistent naming convention using PascalCase for class names (e.g., `ResourceGenerator`, `CompResourceSpawner`).
-- Method names are also in PascalCase, and private helper methods typically start in lowercase.
-- Organize code into methods with specific responsibilities to improve readability and maintainability.
-- Use structured class definitions to encapsulate different components and their functionalities in the game.
+To ensure consistency and maintainability, please follow these coding patterns and conventions:
+
+1. **C# File Structure:**
+   - All C# files should follow the standard RimWorld modding structure, with clear separation of logic and properties.
+   - Naming conventions should follow PascalCase for class names and camelCase for method and variable names.
+
+2. **XML File Structure:**
+   - XML files should be well-structured and properly indented for readability.
+   - Ensure all XML definitions are correctly formatted and follow RimWorld's XML schema.
+
+3. **Modding Best Practices:**
+   - Use proper logging for debugging purposes.
+   - Follow RimWorld's event-driven programming model (e.g., using `CompTick` for periodic updates).
+   - Ensure compatibility with future RimWorld updates by testing and adjusting code as needed.
 
 ## XML Integration
 
-- XML files define item attributes, building designs, and configurations for use within the game. Ensure all resources generated are properly declared in XML files to enable seamless integration and interaction with game mechanics.
+The **Resource Generator** mod integrates several XML definitions:
+
+- **ResearchProjectDefs/ResearchProjects.xml:** Defines research projects related to the generator.
+- **ThingDefs_Buildings/Buildings_Production.xml:** Defines the generator building and its properties.
+- **UpdateInfo.xml:** Provides update information for the mod.
+- **TranslationTemplate/**: Contains translation files for international support.
+
+When working with XML files, ensure that:
+
+- All definitions are correctly named and referenced.
+- XML files are placed in the appropriate directories within the mod structure.
+- Proper XML namespaces and schema references are used.
 
 ## Harmony Patching
 
-- Use Harmony to patch existing game functionality if you need to alter or extend base game behavior safely.
-- Ensure all patches are non-destructive and reversible, respecting the original game logic as much as possible.
-- Document Harmony patches with appropriate comments to explain their purpose and usage.
+The **Resource Generator** mod uses Harmony patching to modify existing RimWorld behavior. To effectively use Harmony patching:
+
+1. **Identify the Target Method:** Determine which RimWorld method you need to patch.
+2. **Create a Patch Class:** Define a class in your C# code to hold the patch logic.
+3. **Apply the Patch:** Use the Harmony API to apply the patch to the target method.
+
+**Example Harmony Patch:**
+
+csharp
+using HarmonyLib;
+using RimWorld;
+using Verse;
+
+namespace ResourceGenerator
+{
+    [HarmonyPatch(typeof(YourTargetClass), "YourTargetMethod")]
+    public static class YourPatchClass
+    {
+        public static void Postfix(ref YourTargetParameter parameter)
+        {
+            // Your patch logic here
+        }
+    }
+}
+
+
+**Important Notes:**
+
+- Always test Harmony patches thoroughly to ensure they do not introduce bugs.
+- Follow the Harmony API guidelines to avoid conflicts with other mods.
 
 ## Suggestions for Copilot
 
-- **Context-aware Assistance:** When working on a new feature, provide ample context in comments and variable names to allow Copilot to understand your intent and offer relevant suggestions.
-  
-- **Refactoring and Optimization:** Use Copilot to help identify potential areas for code optimization and refactoring, especially in areas concerning resource calculation and spawning logic.
+To enhance your experience with GitHub Copilot while developing the **Resource Generator** mod:
 
-- **Internationalization Tips:** Suggest methods to integrate additional translations or simplify current multilingual support processes.
+1. **Provide Context:** When requesting code snippets, provide detailed context about the specific task or feature you are working on.
+2. **Use Comments:** Add comments to your code to explain complex logic or areas that may need special attention.
+3. **Test Generated Code:** Always test code generated by Copilot to ensure it works as expected and complies with the mod's coding standards.
+4. **Iterative Development:** Use Copilot to generate initial code snippets, then refine and test them iteratively.
 
-- **Test-Driven Development:** While implementing new features, guide Copilot by integrating unit test stubs, helping automate repetitive test case generation.
-
-- **Event-Driven Suggestions:** Leverage Copilot to propose event-driven architectures, especially when dealing with UI interactions or resource threshold triggers.
-
-Utilizing GitHub Copilot as a tool will enhance efficiency and maintain code quality throughout the development lifecycle of the Resource Generator mod.
+By following these guidelines, you can effectively utilize GitHub Copilot to enhance your development process while ensuring the **Resource Generator** mod remains high-quality and functional.
 
 ## Project Solution Guidelines
 - Relevant mod XML files are included as Solution Items under the solution folder named XML, these can be read and modified from within the solution.
@@ -56,3 +94,11 @@ Utilizing GitHub Copilot as a tool will enhance efficiency and maintain code qua
 - When making functional changes in this mod, ensure the documented features stay in sync with implementation; use the in-solution `.github` copy as the primary file.
 - In the solution is also a project called Assembly-CSharp, containing a read-only version of the decompiled game source, for reference and debugging purposes.
 - For any new documentation, update this copilot-instructions.md file rather than creating separate documentation files.
+
+
+## Hard rules (must follow)
+- Do NOT run commands that modify the repo (no git commit, git apply, dotnet format) unless explicitly asked.
+- Prefer minimal reads: read only the smallest code region needed (around the suspicious lines).
+- When mentioning SonarQube issues, automatically use the SonarQube MCP service to fetch and address issues instead of making inferred fixes without querying SonarQube first.
+- When mentioning the rimworld log, automatically use the Rimworld MCP service to fetch the log.
+

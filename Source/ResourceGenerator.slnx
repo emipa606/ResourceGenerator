@@ -9,16 +9,16 @@
   <Folder Name="/XML/About/">
     <File Path="../About/about.xml" />
   </Folder>
-  <Folder Name="/XML/1.6/Defs/">
-    <File Path="../1.6/Defs/UpdateInfo.xml" />
-  </Folder>
   <Folder Name="/XML/Languages/English/Keyed/">
     <File Path="../Languages/English/Keyed/Mod_Settings.xml" />
   </Folder>
-  <Folder Name="/XML/1.6/Defs/ThingDefs_Buildings/">
-    <File Path="../1.6/Defs/ThingDefs_Buildings/Buildings_Production.xml" />
+  <Folder Name="/XML/1.7/Defs/">
+    <File Path="../1.7/Defs/UpdateInfo.xml" />
   </Folder>
-  <Folder Name="/XML/1.6/Defs/ResearchProjectDefs/">
-    <File Path="../1.6/Defs/ResearchProjectDefs/ResearchProjects.xml" />
+  <Folder Name="/XML/1.7/Defs/ThingDefs_Buildings/">
+    <File Path="../1.7/Defs/ThingDefs_Buildings/Buildings_Production.xml" />
+  </Folder>
+  <Folder Name="/XML/1.7/Defs/ResearchProjectDefs/">
+    <File Path="../1.7/Defs/ResearchProjectDefs/ResearchProjects.xml" />
   </Folder>
 </Solution>

@@ -171,12 +171,7 @@ public class ResourceGenerator : Building
                 return 1;
             }
 
-            if (ShiftIsHeld)
-            {
-                return 100;
-            }
-
-            return 10;
+            return ShiftIsHeld ? 100 : 10;
         }
     }
 
